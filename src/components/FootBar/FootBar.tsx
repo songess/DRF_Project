@@ -9,20 +9,20 @@ import { ReactComponent as Chat } from '../../assets/image/chat.svg'
 
 export default function FootBar() {
   return (
-    <div css={footbarWrapper}>
-      <Link to="/login" css={linkWrap}>
-        <Category css={footbarbutton} />
-      </Link>
-      <Link to="/login" css={linkWrap}>
+    <footer css={footbarWrapper}>
+      <Link to="/friend" css={linkWrap}>
         <Profile css={footbarbutton} />
       </Link>
-      <Link to="/login" css={linkWrap}>
-        <SunFog css={footbarbutton} />
-      </Link>
-      <Link to="/login" css={linkWrap}>
+      <Link to="/chat" css={linkWrap}>
         <Chat css={footbarbutton} />
       </Link>
-    </div>
+      <Link to="/chatbot" css={linkWrap}>
+        <SunFog css={footbarbutton} />
+      </Link>
+      <Link to="/more" css={linkWrap}>
+        <Category css={footbarbutton} />
+      </Link>
+    </footer>
   )
 }
 

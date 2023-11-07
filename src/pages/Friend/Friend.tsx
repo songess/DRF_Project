@@ -8,6 +8,7 @@ import { ReactComponent as Filter } from '../../assets/image/filter.svg'
 import UserListCard from '../../components/UserListCard/UserListCard'
 import Modal from '../../components/Modal/Modal'
 import Button from '../../components/Button/Button'
+import MainHeader from '../../components/MainHeader/MainHeader'
 
 interface FriendInfo {
   name: string
@@ -29,12 +30,26 @@ const DUMMY_FRIENDS = [
     major: '컴퓨터공학과',
     id: 2,
     img: 'defaultImage.jpeg',
+    favorites: false,
+  },
+  {
+    name: '채원',
+    major: '디자인과',
+    id: 4,
+    img: 'defaultImage.jpeg',
     favorites: true,
   },
   {
-    name: '강남',
-    major: '경제학과',
-    id: 3,
+    name: '주혁',
+    major: '소프트웨어학과',
+    id: 5,
+    img: 'defaultImage.jpeg',
+    favorites: false,
+  },
+  {
+    name: '혁주',
+    major: '화학과',
+    id: 6,
     img: 'defaultImage.jpeg',
     favorites: false,
   },
@@ -47,38 +62,51 @@ export default function Friend() {
   )
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [selectedFriend, setSelectedFriend] = useState<FriendInfo>({
-    name: 'sssss',
-    major: 'sssssssssss',
+    name: '',
+    major: '',
     id: 0,
-    img: 'defaultImage.image',
+    img: '',
     favorites: false,
   })
 
   const cardClickHandler = (friend: FriendInfo) => {
-    setSelectedFriend((p) => ({ ...p, friend }))
+    setSelectedFriend((p) => ({ ...p, ...friend }))
     setIsModalOpen((p) => !p)
   }
   return (
     <div css={friendWrapper}>
       <Modal isOpen={isModalOpen} onClear={() => setIsModalOpen((p) => !p)}>
-        <Modal.Header>{selectedFriend.img}</Modal.Header>
+        <Modal.Header>
+          <img src={selectedFriend.img} alt="profile" css={modalImage} />
+        </Modal.Header>
         <Modal.Content>
-          <p css={selectedFriendName}>{selectedFriend.name}</p>
-          <p css={selectedFriendMajor}>{selectedFriend.major}</p>
+          <div css={modalContent}>
+            <p css={selectedFriendName}>{selectedFriend.name}</p>
+            <p css={selectedFriendMajor}>{selectedFriend.major}</p>
+          </div>
         </Modal.Content>
         <Modal.Footer>
-          <Button backgroundColor='primary' color='white' size='small' width='100%'>즐겨찾기</Button>
-          <Button backgroundColor='subtle_dark' color='white' size='small' width='100%'>1:1채팅</Button>
+          <Button
+            backgroundColor="primary"
+            color="white"
+            size="medium"
+            width="100%"
+          >
+            즐겨찾기
+          </Button>
+          <Button
+            backgroundColor="subtle_dark"
+            color="white"
+            size="medium"
+            width="100%"
+          >
+            1:1채팅
+          </Button>
         </Modal.Footer>
       </Modal>
-      <header css={friendHeader}>
-        <p css={friend}>친구</p>
-        <Search css={friendButton} />
-        <AddUser css={friendButton} />
-        <Filter css={friendButton} />
-      </header>
+      <MainHeader headerName='친구' buttonNames={['search','adduser','filter']}/>
       <section css={myProfile}>
-        <img src="defaultImage.jpeg" alt="프로필" css={myProfileImage} />
+        <img src="myProfileImage.jpg" alt="프로필" css={myProfileImage} />
         <p>{me}</p>
       </section>
       <hr />
@@ -116,13 +144,13 @@ export default function Friend() {
   )
 }
 const selectedFriendName = css`
-  font-size: ${theme.textStyle.title_medium.font_size};
-  line-height: ${theme.textStyle.title_medium.line_height};
+  font-size: ${theme.textStyle.title_large.font_size};
+  line-height: ${theme.textStyle.title_large.line_height};
 `
 const selectedFriendMajor = css`
-  font-size: ${theme.textStyle.body_medium.font_size};
-  line-height: ${theme.textStyle.body_medium.line_height};
-  color: ${theme.color.background};
+  font-size: ${theme.textStyle.title_medium.font_size};
+  line-height: ${theme.textStyle.title_medium.line_height};
+  color: ${theme.color.subtle_light};
 `
 
 const friends = css`
@@ -175,22 +203,38 @@ const friend = css`
   line-height: ${theme.textStyle.title_large.line_height};
 `
 const friendHeader = css`
-  position: relative;
+  position: sticky;
   top: 0;
   width: 100%;
   display: flex;
-  padding: 20px 20px 0 20px;
+  padding: 20px 20px 10px 20px;
   gap: 10px;
+  background-color: white;
+  border-bottom: 1px solid ${theme.color.background};
 `
 
 const friendWrapper = css`
   position: relative;
   width: 100%;
   height: 100%;
+  overflow: auto;
   hr {
     background-color: ${theme.color.background};
     border: none;
     padding: 0.5px;
     margin: 10px auto;
   }
+`
+
+const modalImage = css`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+`
+
+const modalContent = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
 `

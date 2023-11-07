@@ -93,6 +93,7 @@ export default function Login() {
     },
     [isSignUpMode],
   )
+
   const modeSwitchHandler = () => {
     if (isSignUpMode) {
       //signup->login 이면 text필드 삭제
@@ -114,6 +115,7 @@ export default function Login() {
     }
     setIsSignUpMode((p) => !p)
   }
+
   const submitHandler = () => {
     const loginUser = DUMMY_USER.filter(
       (user) => user.email === formState.email.value,
@@ -129,6 +131,11 @@ export default function Login() {
       }
     }
   }
+
+  const keyDownHandler = (e:React.KeyboardEvent) =>{
+    if(e.key === "Enter") submitHandler();
+  }
+  
   return (
     <div css={loginWrapper}>
       <Modal
@@ -189,6 +196,7 @@ export default function Login() {
           type="password"
           validator={[VALIDATOR_MINLENGTH(8)]}
           onInputChange={changeHandler}
+          onKeyDown={keyDownHandler}
         />
         {isSignUpMode ? (
           ''

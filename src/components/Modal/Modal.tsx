@@ -76,6 +76,7 @@ const modalWrapper = css`
   gap: 30px;
   background-color: white;
   border-radius: 20px;
+  min-width: 300px;
 `
 
 const modalHeader = css`

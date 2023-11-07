@@ -1,16 +1,21 @@
 import React, { useState } from 'react'
-import Modal from '../components/Modal/Modal'
+
+interface FriendInfo {
+  name: string
+  major: string
+  id: number
+  img: string
+  favorites: boolean
+}
 
 export function useCallModal() {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const [selectedFriend, setSelectedFriend] = useState<FriendInfo>({
+    name: 'sssss',
+    major: 'sssssssssss',
+    id: 0,
+    img: 'defaultImage.image',
+    favorites: false,
+  })
 
-  return (
-    <div>
-      <Modal isOpen={isModalOpen} onClear={() => setIsModalOpen((p) => !p)}>
-        <Modal.Header></Modal.Header>
-        <Modal.Content></Modal.Content>
-        <Modal.Footer></Modal.Footer>
-      </Modal>
-    </div>
-  )
+  return { selectedFriend, setSelectedFriend }
 }

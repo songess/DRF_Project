@@ -48,6 +48,8 @@ const commonStyle = (
       ? theme.color.subtle_light
       : backgroundColor === 'subtle_dark'
       ? '#31313B'
+      : backgroundColor === 'primary_subtle'
+      ? theme.color.thick_primary_subtle
       : theme.color.thick_primary};
   }
   &:disabled {
@@ -81,7 +83,7 @@ const buttonStyles = (
     ${commonStyle(width, color, backgroundColor)}
     padding: 16px 20px;
     font-size: ${theme.textStyle.title_medium.font_size};
-    line-height: ${theme.textStyle.body_large.line_height};
+    line-height: ${theme.textStyle.title_medium.line_height};
     border-radius: 16px;
   `,
 })

@@ -21,7 +21,7 @@ const layout = css`
 const container = css`
   max-width: 540px;
   height: 100%;
-  max-height: 840px;
+  max-height: 950px;
   margin: 0 auto;
   background-color: ${theme.color.white};
 `
