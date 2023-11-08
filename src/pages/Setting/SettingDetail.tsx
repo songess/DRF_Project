@@ -5,10 +5,22 @@ import { css } from '@emotion/react'
 import theme from '../../styles/theme'
 import { ReactComponent as ArrowLeft } from '../../assets/image/arrowLeft.svg'
 import { ReactComponent as CheckSquare } from '../../assets/image/checkSquare.svg'
+import { useAtom } from 'jotai'
+import { LoginUser } from '../../util/store'
 
 export default function SettingDetail() {
+  const [DUMMY_USER, setDUMMY_USER] = useAtom(LoginUser)
   const { detail } = useParams()
+  const _detail= detail as string;
   const navigate = useNavigate()
+  const [userSettingChange, setUserSettingChange] = useState<string>('')
+  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserSettingChange(e.target.value)
+  }
+  const settingLoginUser = () => {
+    setDUMMY_USER((prev) => ({ ...prev, [_detail]: userSettingChange }))
+    navigate(-1);
+  }
   return (
     <div css={settingDetailWrapper}>
       <header css={settingDetailHeader}>
@@ -21,7 +33,7 @@ export default function SettingDetail() {
           <ArrowLeft />
         </div>
         <p>{detail} 변경</p>
-        <div css={acceptChange}>
+        <div css={acceptChange} onClick={settingLoginUser}>
           <CheckSquare />
         </div>
       </header>
@@ -31,6 +43,8 @@ export default function SettingDetail() {
         touched={false}
         type="text"
         placeholder={`${detail}을 입력하세요`}
+        value={userSettingChange}
+        onChange={inputChangeHandler}
       />
     </div>
   )
@@ -48,7 +62,7 @@ const goBack = css`
 
 const acceptChange = css`
   position: absolute;
-  padding: 0 5px;
+  padding: 5px 5px 0 5px;
   border-radius: 10px;
   top: 20px;
   right: 0;
