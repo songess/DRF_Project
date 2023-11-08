@@ -47,7 +47,7 @@ const DUMMY_FRIENDS = [
     favorites: false,
   },
   {
-    name: '혁주',
+    name: '학림',
     major: '화학과',
     id: 6,
     img: 'defaultImage.jpeg',
@@ -104,7 +104,10 @@ export default function Friend() {
           </Button>
         </Modal.Footer>
       </Modal>
-      <MainHeader headerName='친구' buttonNames={['search','adduser','filter']}/>
+      <MainHeader
+        headerName="친구"
+        buttonNames={['search', 'adduser', 'filter']}
+      />
       <section css={myProfile}>
         <img src="myProfileImage.jpg" alt="프로필" css={myProfileImage} />
         <p>{me}</p>

@@ -9,10 +9,10 @@ type InputType = 'password' | 'email' | 'text'
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   isIconVisible: boolean
   type: InputType
-  errorMessage: string
+  errorMessage?: string
   isValid: boolean
   touched: boolean
-  whichIcon: 'close' | 'check'
+  whichIcon?: 'close' | 'check'
 }
 
 export default function Input({
@@ -43,8 +43,15 @@ export default function Input({
             : inputContainer(isFocused)
         }
         onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
       >
-        <input css={inputStyle} type={type} id={placeholder} {...props} />
+        <input
+          css={inputStyle}
+          type={type}
+          id={placeholder}
+          placeholder={placeholder}
+          {...props}
+        />
         {isIconVisible &&
           (whichIcon === 'close' ? (
             <CloseSquare

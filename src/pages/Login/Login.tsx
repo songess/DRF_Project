@@ -11,6 +11,8 @@ import { css } from '@emotion/react'
 import Modal from '../../components/Modal/Modal'
 import { useNavigate } from 'react-router-dom'
 import '../../styles/modal.css'
+import { DUMMY_Users} from '../../util/store';
+import { useAtom } from 'jotai'
 
 interface LoginForm {
   email: {
@@ -34,12 +36,8 @@ interface InputInfo {
   touched: boolean
 }
 
-const DUMMY_USER = [
-  { name: 'eunsu', email: 'songess@naver.com', password: 'qmfforvldzm' },
-  { name: 'euneun', email: 'songesss@naver.com', password: 'qmfforvldzm' },
-]
-
 export default function Login() {
+  const [DUMMY_USER]=useAtom(DUMMY_Users);
   const navigate = useNavigate()
   const [isSignUpMode, setIsSignUpMode] = useState<boolean>(false)
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
@@ -118,13 +116,13 @@ export default function Login() {
 
   const submitHandler = () => {
     const loginUser = DUMMY_USER.filter(
-      (user) => user.email === formState.email.value,
+      (user) => user.이메일 === formState.email.value,
     )
     if (loginUser.length === 0) {
       setIsModalOpen((p) => !p)
       console.log(loginUser)
     } else {
-      if (loginUser[0].password === formState.password.value)
+      if (loginUser[0].비밀번호 === formState.password.value)
         navigate('/friend')
       else {
         setIsModalOpen((p) => !p)

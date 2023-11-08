@@ -8,6 +8,7 @@ import PreLogin from './pages/Login/PreLogin'
 import Chatbot from './pages/Chatbot/Chatbot'
 import More from './pages/More/More'
 import Setting from './pages/Setting/Setting'
+import SettingDetail from './pages/Setting/SettingDetail'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/chatbot" element={<Chatbot />} />
         <Route path="/more" element={<More />} />
         <Route path="/setting" element={<Setting />} />
+        <Route path="/setting/:detail" element={<SettingDetail/>} />
       </Routes>
     </Layout>
   )

@@ -51,7 +51,9 @@ const headerNameStyle = css`
 `
 const headerButton = css`
   color: ${theme.color.black};
+  border-radius: 5px;
   &:hover {
     color: ${theme.color.subtle_dark};
+    background-color: ${theme.color.background};
   }
 `

@@ -5,19 +5,34 @@ import FootBar from '../../components/FootBar/FootBar'
 import { ReactComponent as ArrowLeft } from '../../assets/image/arrowLeft.svg'
 import { ReactComponent as Edit } from '../../assets/image/edit.svg'
 import SettingList from './SettingList'
-
-const DUMMY_SETTINGS = [
-  { title: '전화번호', content: '010-9145-9931', id: 1 },
-  { title: '학번', content: '20201593', id: 2 },
-  { title: '이메일', content: 'songess@naver.com', id: 3 },
-  { title: '비밀번호', content: '', id: 4 },
-]
+import { useNavigate } from 'react-router-dom'
+import { LoginUser } from '../../util/store'
+import { useAtom } from 'jotai'
 
 export default function Setting() {
+  const [DUMMY_USER] = useAtom(LoginUser)
+  const keys = Object.keys(DUMMY_USER)
+  const values = Object.values(DUMMY_USER)
+  let DUMMY_SETTINGS: { title: string; content: string; id: number }[] = []
+  console.log(keys, values)
+  for (let i = 0; i < keys.length; i++) {
+    DUMMY_SETTINGS = [
+      ...DUMMY_SETTINGS,
+      { title: keys[i], content: values[i], id: i + 1 },
+    ]
+  }
+  const navigate = useNavigate()
   return (
     <div css={settingWrapper}>
       <header css={settingHeader}>
-        <ArrowLeft css={arrowLeft} />
+        <div
+          css={goBackButtonContainer}
+          onClick={() => {
+            navigate(-1)
+          }}
+        >
+          <ArrowLeft />
+        </div>
         <p>프로필 관리</p>
       </header>
       <section css={settingProfile}>
@@ -30,24 +45,47 @@ export default function Setting() {
           <Edit css={editImage} />
         </div>
       </section>
-      {DUMMY_SETTINGS.map((setting) => (
-        <>
-          <SettingList
-            content={setting.content}
-            title={setting.title}
-            key={setting.id}
-          />
-          <hr />
-        </>
-      ))}
+      {DUMMY_SETTINGS.map((setting) => {
+        const isPassword = setting.title === '비밀번호' ? true : false
+        return (
+          <>
+            <SettingList
+              title={setting.title}
+              content={isPassword ? '' : setting.content}
+              key={setting.id}
+              onClick={() => {
+                navigate(`/setting/${setting.title}`)
+              }}
+            />
+            <hr />
+          </>
+        )
+      })}
       <div css={settingFooter}>
         <p css={withdraw}>회원탈퇴</p>
-        <p css={logOut}>로그아웃</p>
+        <p
+          css={logOut}
+          onClick={() => {
+            navigate('/login')
+          }}
+        >
+          로그아웃
+        </p>
       </div>
       <FootBar />
     </div>
   )
 }
+const goBackButtonContainer = css`
+  position: absolute;
+  padding: 0 5px;
+  border-radius: 10px;
+  top: 20px;
+  left: 20px;
+  &:hover {
+    background-color: ${theme.color.background};
+  }
+`
 
 const settingFooter = css`
   width: 100%;
@@ -61,9 +99,21 @@ const settingFooter = css`
 `
 const withdraw = css`
   color: ${theme.color.primary};
+  padding: 5px;
+  &:hover {
+    background-color: ${theme.color.background};
+    border-radius: 5px;
+    cursor: pointer;
+  }
 `
 const logOut = css`
   color: ${theme.color.subtle_dark};
+  padding: 5px;
+  &:hover {
+    background-color: ${theme.color.background};
+    border-radius: 5px;
+    cursor: pointer;
+  }
 `
 const settingProfleDetail = css`
   position: relative;
@@ -110,10 +160,4 @@ const settingProfileImage = css`
     top: 0;
     right: 0;
   }
-`
-
-const arrowLeft = css`
-  position: absolute;
-  top: 25px;
-  left: 20px;
 `

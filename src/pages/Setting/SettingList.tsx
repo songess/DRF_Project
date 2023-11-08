@@ -6,14 +6,24 @@ import theme from '../../styles/theme'
 interface SettingListProps {
   title: string
   content: string
+  onClick: () => void
 }
 
-export default function SettingList({ title, content }: SettingListProps) {
+export default function SettingList({
+  title,
+  content,
+  onClick,
+}: SettingListProps) {
   return (
     <section css={settingListWrapper}>
       <div css={settingTitle}>{title}</div>
       <div css={settingContent}>{content}</div>
-      <Button backgroundColor="primary" color="white" size="small">
+      <Button
+        backgroundColor="primary"
+        color="white"
+        size="small"
+        onClick={onClick}
+      >
         변경
       </Button>
     </section>
