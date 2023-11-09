@@ -199,7 +199,7 @@ export default function Login() {
         {isSignUpMode ? (
           ''
         ) : (
-          <p css={isForgetPassword}>비밀번호를 잊으셨나요?</p>
+          <p css={isForgetPassword} onClick={()=>{navigate("/forgetpassword")}}>비밀번호를 잊으셨나요?</p>
         )}
       </section>
       <footer css={loginFooter}>

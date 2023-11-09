@@ -49,12 +49,13 @@ const chatbotHeader = css`
 `
 
 const chatbotWrapper = css`
-  padding: 60px 0;
+  padding-bottom: 80px;
   position: relative;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 80px;
 `

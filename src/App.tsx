@@ -9,6 +9,7 @@ import Chatbot from './pages/Chatbot/Chatbot'
 import More from './pages/More/More'
 import Setting from './pages/Setting/Setting'
 import SettingDetail from './pages/Setting/SettingDetail'
+import ForgetPassword from './pages/Login/ForgetPassword'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/chatbot" element={<Chatbot />} />
         <Route path="/more" element={<More />} />
         <Route path="/setting" element={<Setting />} />
+        <Route path="/forgetpassword" element={<ForgetPassword />} />
         <Route path="/setting/:detail" element={<SettingDetail/>} />
       </Routes>
     </Layout>

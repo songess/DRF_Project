@@ -73,6 +73,11 @@ export default function Friend() {
     setSelectedFriend((p) => ({ ...p, ...friend }))
     setIsModalOpen((p) => !p)
   }
+
+  const modalButtonHandler = () => {
+    setSelectedFriend((p) => ({ ...p, favorites:!(p.favorites)}))
+    
+  }
   return (
     <div css={friendWrapper}>
       <Modal isOpen={isModalOpen} onClear={() => setIsModalOpen((p) => !p)}>
@@ -91,8 +96,9 @@ export default function Friend() {
             color="white"
             size="medium"
             width="100%"
+            onClick={modalButtonHandler}
           >
-            즐겨찾기
+            {selectedFriend.favorites ? '즐겨찾기해제' : '즐겨찾기'}
           </Button>
           <Button
             backgroundColor="subtle_dark"

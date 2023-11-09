@@ -10,10 +10,10 @@ interface FriendInfo {
 
 export function useCallModal() {
   const [selectedFriend, setSelectedFriend] = useState<FriendInfo>({
-    name: 'sssss',
-    major: 'sssssssssss',
+    name: '',
+    major: '',
     id: 0,
-    img: 'defaultImage.image',
+    img: '',
     favorites: false,
   })
 
