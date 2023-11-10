@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { css } from '@emotion/react'
 import theme from '../../styles/theme'
 import FootBar from '../../components/FootBar/FootBar'
-import { ReactComponent as Search } from '../../assets/image/search.svg'
-import { ReactComponent as AddUser } from '../../assets/image/addUser.svg'
-import { ReactComponent as Filter } from '../../assets/image/filter.svg'
+import { ReactComponent as Card } from '../../assets/image/card.svg'
+import { ReactComponent as Notebook } from '../../assets/image/notebook.svg'
 import UserListCard from '../../components/UserListCard/UserListCard'
 import Modal from '../../components/Modal/Modal'
 import Button from '../../components/Button/Button'
 import MainHeader from '../../components/MainHeader/MainHeader'
 import { useNavigate } from 'react-router-dom'
+import UpdateModal from '../../components/Modal/UpdateModal'
 
 interface FriendInfo {
   name: string
@@ -64,6 +64,7 @@ export default function Friend() {
     FriendInfo[]
   >(DUMMY_FRIENDS.filter((friend) => friend.favorites === true))
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState<boolean>(false)
   const [selectedFriend, setSelectedFriend] = useState<FriendInfo>({
     name: '',
     major: '',
@@ -126,9 +127,28 @@ export default function Friend() {
           </Button>
         </Modal.Footer>
       </Modal>
+      <UpdateModal
+        isOpen={isUpdateModalOpen}
+        onClear={() => setIsUpdateModalOpen((p) => !p)}
+      >
+        <UpdateModal.Header>친구추가</UpdateModal.Header>
+        <UpdateModal.Content>
+          <div css={modalCard}>
+            <Notebook/>
+            <p>이름으로 친구추가</p>
+          </div>
+          <div css={modalCard}>
+            <Card/>
+            <p>학번으로 친구추가</p>
+          </div>
+        </UpdateModal.Content>
+      </UpdateModal>
       <MainHeader
         headerName="친구"
         buttonNames={['search', 'adduser', 'filter']}
+        onClick={() => {
+          setIsUpdateModalOpen((p) => !p)
+        }}
       />
       <section
         css={myProfile}
@@ -267,4 +287,21 @@ const modalContent = css`
   flex-direction: column;
   align-items: center;
   gap: 5px;
+`
+
+const modalCard = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  gap: 5px;
+  flex-grow: 1;
+  p {
+    font-size: ${theme.textStyle.body_small.font_size};
+    line-height: ${theme.textStyle.body_small.line_height};
+  }
+  &:hover {
+    background-color: ${theme.color.background};
+  }
 `

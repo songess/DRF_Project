@@ -11,18 +11,26 @@ type HeaderButton = 'search' | 'adduser' | 'filter' | 'chat'
 interface MainHeaderProps {
   headerName: string
   buttonNames: HeaderButton[]
+  onClick?: () => void
 }
 
 export default function MainHeader({
   headerName,
   buttonNames,
+  onClick,
 }: MainHeaderProps) {
   return (
     <header css={header}>
       <p css={headerNameStyle}>{headerName}</p>
-      {buttonNames.includes('search') && <Search css={headerButton} />}
-      {buttonNames.includes('adduser') && <AddUser css={headerButton} />}
-      {buttonNames.includes('chat') && <NewChat css={headerButton} />}
+      {buttonNames.includes('search') && (
+        <Search css={headerButton} onClick={onClick} />
+      )}
+      {buttonNames.includes('adduser') && (
+        <AddUser css={headerButton} onClick={onClick} />
+      )}
+      {buttonNames.includes('chat') && (
+        <NewChat css={headerButton} onClick={onClick} />
+      )}
       {buttonNames.includes('filter') && (
         <Link to="/setting" css={buttonContainer}>
           <Filter css={headerButton} />
