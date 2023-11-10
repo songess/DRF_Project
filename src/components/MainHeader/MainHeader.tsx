@@ -17,7 +17,6 @@ export default function MainHeader({
   headerName,
   buttonNames,
 }: MainHeaderProps) {
-  console.log(buttonNames)
   return (
     <header css={header}>
       <p css={headerNameStyle}>{headerName}</p>

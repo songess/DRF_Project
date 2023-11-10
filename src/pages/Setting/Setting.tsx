@@ -37,7 +37,7 @@ export default function Setting() {
       <section css={settingProfile}>
         <div css={settingProfleDetail}>
           <img
-            src="myProfileImage.jpg"
+            src="myProfileImage2.jpeg"
             alt="profile"
             css={settingProfileImage}
           />

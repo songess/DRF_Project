@@ -18,7 +18,7 @@ export default function More() {
             <ArrowRight />
           </Link>
         </div>
-        <img src="myProfileImage.jpg" alt="프로필" css={profileImage}></img>
+        <img src="myProfileImage2.jpeg" alt="프로필" css={profileImage}></img>
       </section>
       <FootBar />
     </div>
