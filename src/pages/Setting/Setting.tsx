@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { css } from '@emotion/react'
 import theme from '../../styles/theme'
 import FootBar from '../../components/FootBar/FootBar'
@@ -14,7 +14,6 @@ export default function Setting() {
   const keys = Object.keys(DUMMY_USER)
   const values = Object.values(DUMMY_USER)
   let DUMMY_SETTINGS: { title: string; content: string; id: number }[] = []
-  console.log(keys, values)
   for (let i = 0; i < keys.length; i++) {
     DUMMY_SETTINGS = [
       ...DUMMY_SETTINGS,
@@ -48,17 +47,16 @@ export default function Setting() {
       {DUMMY_SETTINGS.map((setting) => {
         const isPassword = setting.title === '비밀번호' ? true : false
         return (
-          <>
+          <Fragment key={setting.id}>
             <SettingList
               title={setting.title}
               content={isPassword ? '' : setting.content}
-              key={setting.id}
               onClick={() => {
                 navigate(`/setting/${setting.title}`)
               }}
             />
             <hr />
-          </>
+          </Fragment>
         )
       })}
       <div css={settingFooter}>
