@@ -134,11 +134,11 @@ export default function Friend() {
         <UpdateModal.Header>친구추가</UpdateModal.Header>
         <UpdateModal.Content>
           <div css={modalCard}>
-            <Notebook/>
+            <Notebook />
             <p>이름으로 친구추가</p>
           </div>
           <div css={modalCard}>
-            <Card/>
+            <Card />
             <p>학번으로 친구추가</p>
           </div>
         </UpdateModal.Content>
@@ -239,30 +239,6 @@ const myProfile = css`
     background-color: ${theme.color.primary_subtle};
   }
 `
-
-const friendButton = css`
-  color: ${theme.color.black};
-  &:hover {
-    color: ${theme.color.subtle_dark};
-  }
-`
-
-const friend = css`
-  flex-grow: 1;
-  font-size: ${theme.textStyle.title_large.font_size};
-  line-height: ${theme.textStyle.title_large.line_height};
-`
-const friendHeader = css`
-  position: sticky;
-  top: 0;
-  width: 100%;
-  display: flex;
-  padding: 20px 20px 10px 20px;
-  gap: 10px;
-  background-color: white;
-  border-bottom: 1px solid ${theme.color.background};
-`
-
 const friendWrapper = css`
   position: relative;
   width: 100%;
