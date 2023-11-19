@@ -12,6 +12,9 @@ import SettingDetail from './pages/Setting/SettingDetail'
 import ForgetPassword from './pages/Login/ForgetPassword'
 import ForgetPassword_2 from './pages/Login/ForgetPassword_2'
 import ForgetPassword_3 from './pages/Login/ForgetPassword_3'
+import SignUp_1 from './pages/Login/SignUp_1'
+import SignUp_2 from './pages/Login/SignUp_2'
+import SignUp_3 from './pages/Login/SignUp_3'
 
 function App() {
   return (
@@ -27,6 +30,9 @@ function App() {
         <Route path="/forgetpassword" element={<ForgetPassword />} />
         <Route path="/forgetpassword_2" element={<ForgetPassword_2 />} />
         <Route path="/forgetpassword_3" element={<ForgetPassword_3 />} />
+        <Route path="/signup_1" element={<SignUp_1 />} />
+        <Route path="/signup_2" element={<SignUp_2 />} />
+        <Route path="/signup_3" element={<SignUp_3 />} />
         <Route path="/setting/:detail" element={<SettingDetail/>} />
       </Routes>
     </Layout>

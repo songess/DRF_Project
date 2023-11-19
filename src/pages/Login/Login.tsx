@@ -11,7 +11,7 @@ import { css } from '@emotion/react'
 import Modal from '../../components/Modal/Modal'
 import { useNavigate } from 'react-router-dom'
 import '../../styles/modal.css'
-import { DUMMY_Users} from '../../util/store';
+import { DUMMY_Users } from '../../util/store'
 import { useAtom } from 'jotai'
 
 interface LoginForm {
@@ -37,7 +37,7 @@ interface InputInfo {
 }
 
 export default function Login() {
-  const [DUMMY_USER]=useAtom(DUMMY_Users);
+  const [DUMMY_USER] = useAtom(DUMMY_Users)
   const navigate = useNavigate()
   const [isSignUpMode, setIsSignUpMode] = useState<boolean>(false)
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
@@ -115,25 +115,29 @@ export default function Login() {
   }
 
   const submitHandler = () => {
-    const loginUser = DUMMY_USER.filter(
-      (user) => user.이메일 === formState.email.value,
-    )
-    if (loginUser.length === 0) {
-      setIsModalOpen((p) => !p)
-      console.log(loginUser)
+    if (isSignUpMode) {
+      navigate('/signup_1')
     } else {
-      if (loginUser[0].비밀번호 === formState.password.value)
-        navigate('/friend')
-      else {
+      const loginUser = DUMMY_USER.filter(
+        (user) => user.이메일 === formState.email.value,
+      )
+      if (loginUser.length === 0) {
         setIsModalOpen((p) => !p)
+        console.log(loginUser)
+      } else {
+        if (loginUser[0].비밀번호 === formState.password.value)
+          navigate('/friend')
+        else {
+          setIsModalOpen((p) => !p)
+        }
       }
     }
   }
 
-  const keyDownHandler = (e:React.KeyboardEvent) =>{
-    if(e.key === "Enter") submitHandler();
+  const keyDownHandler = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') submitHandler()
   }
-  
+
   return (
     <div css={loginWrapper}>
       <Modal
@@ -199,7 +203,14 @@ export default function Login() {
         {isSignUpMode ? (
           ''
         ) : (
-          <p css={isForgetPassword} onClick={()=>{navigate("/forgetpassword")}}>비밀번호를 잊으셨나요?</p>
+          <p
+            css={isForgetPassword}
+            onClick={() => {
+              navigate('/forgetpassword')
+            }}
+          >
+            비밀번호를 잊으셨나요?
+          </p>
         )}
       </section>
       <footer css={loginFooter}>
