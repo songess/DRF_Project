@@ -10,6 +10,8 @@ import Button from '../../components/Button/Button'
 import MainHeader from '../../components/MainHeader/MainHeader'
 import { useNavigate } from 'react-router-dom'
 import UpdateModal from '../../components/Modal/UpdateModal'
+import IconInput from '../../components/IconInput/IconInput'
+import useHeaderButton from '../../hooks/useHeaderButton'
 
 interface FriendInfo {
   name: string
@@ -63,8 +65,13 @@ export default function Friend() {
   const [DUMMY_FAVORITES_FRIENDS, setDUMMY_FAVORITES_FRIENDS] = useState<
     FriendInfo[]
   >(DUMMY_FRIENDS.filter((friend) => friend.favorites === true))
+  const {
+    headerClickHandler,
+    isAddUserModalOpen,
+    setIsAddUserModalOpen,
+    showSearchInput,
+  } = useHeaderButton()
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState<boolean>(false)
   const [selectedFriend, setSelectedFriend] = useState<FriendInfo>({
     name: '',
     major: '',
@@ -128,8 +135,8 @@ export default function Friend() {
         </Modal.Footer>
       </Modal>
       <UpdateModal
-        isOpen={isUpdateModalOpen}
-        onClear={() => setIsUpdateModalOpen((p) => !p)}
+        isOpen={isAddUserModalOpen}
+        onClear={() => setIsAddUserModalOpen((p) => !p)}
       >
         <UpdateModal.Header>친구추가</UpdateModal.Header>
         <UpdateModal.Content>
@@ -146,10 +153,13 @@ export default function Friend() {
       <MainHeader
         headerName="친구"
         buttonNames={['search', 'adduser', 'filter']}
-        onClick={() => {
-          setIsUpdateModalOpen((p) => !p)
-        }}
+        onClick={headerClickHandler}
       />
+      {showSearchInput && (
+        <div css={searchInputStyle}>
+          <IconInput placeholder="검색" whichIcon="search" />
+        </div>
+      )}
       <section
         css={myProfile}
         onClick={() => {
@@ -280,4 +290,8 @@ const modalCard = css`
   &:hover {
     background-color: ${theme.color.background};
   }
+`
+
+const searchInputStyle = css`
+  padding: 10px 20px;
 `

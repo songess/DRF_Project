@@ -67,7 +67,7 @@ const modalWrapper = css`
   z-index: 1;
   display: flex;
   width: 100%;
-  height: 25%;
+  height: 200px;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;

@@ -9,7 +9,7 @@ interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   placeholder: string
 }
 
-export default function SearchInput({
+export default function IconInput({
   whichIcon,
   placeholder,
 }: SearchInputProps) {

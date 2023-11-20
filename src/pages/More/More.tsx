@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 export default function More() {
   return (
     <div css={moreWrapper}>
-      <MainHeader headerName="더보기" buttonNames={['filter']} />
+      <MainHeader headerName="더보기" buttonNames={['filter']} onClick={()=>{}}/>
       <section css={studentCard}>
         <div css={studentCardInfo}>
           <div css={studentCardHeader}>학생증</div>
