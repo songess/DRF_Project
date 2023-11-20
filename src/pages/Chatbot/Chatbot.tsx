@@ -4,8 +4,10 @@ import FootBar from '../../components/FootBar/FootBar'
 import { ReactComponent as AiChatBot } from '../../assets/image/aiChatBot.svg'
 import Button from '../../components/Button/Button'
 import theme from '../../styles/theme'
+import { useNavigate } from 'react-router-dom'
 
 export default function Chatbot() {
+  const navigate = useNavigate()
   return (
     <div css={chatbotWrapper}>
       <header css={chatbotHeader}>날씨 챗봇 AI에 오신 것을 환영합니다!</header>
@@ -14,10 +16,24 @@ export default function Chatbot() {
         <p>Chatbot AI</p>
       </section>
       <div css={buttonContainer}>
-        <Button backgroundColor="primary" color="white" size="large">
+        <Button
+          backgroundColor="primary"
+          color="white"
+          size="large"
+          onClick={() => {
+            navigate('/chatbotmessage')
+          }}
+        >
           시작하기
         </Button>
-        <Button backgroundColor="primary_subtle" color="primary" size="small">
+        <Button
+          backgroundColor="primary_subtle"
+          color="primary"
+          size="small"
+          onClick={() => {
+            navigate('/chatbotsavedchat')
+          }}
+        >
           이전 기록 보기
         </Button>
       </div>

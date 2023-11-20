@@ -55,8 +55,8 @@ const itemInfo = css`
   align-items: end;
 `
 const itemMessageStyle = css`
-  font-size: ${theme.textStyle.body_large.font_size};
-  line-height: ${theme.textStyle.body_large.line_height};
+  font-size: ${theme.textStyle.body_medium.font_size};
+  line-height: ${theme.textStyle.body_medium.line_height};
   color: ${theme.color.subtle_light};
 `
 
@@ -68,15 +68,14 @@ const itemContent =css`
 `
 
 const itemNameStyle = css`
-  font-size: ${theme.textStyle.title_medium.font_size};
-  line-height: ${theme.textStyle.title_medium.line_height};
+  font-size: ${theme.textStyle.title_small.font_size};
+  line-height: ${theme.textStyle.title_small.line_height};
 `
 
 const itemImageStyle = css`
-  width: 55px;
-  height:55px;
-  border-radius: 20px;
-  padding: 5px;
+  width: 50px;
+  height:50px;
+  border-radius: 10px;
 
 `
 

@@ -6,12 +6,11 @@ import { ReactComponent as CheckSvg } from '../../assets/image/checkSquare.svg'
 
 interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   whichIcon: 'search' | 'check'
-  placeholder: string
 }
 
 export default function IconInput({
   whichIcon,
-  placeholder,
+  ...props
 }: SearchInputProps) {
   const [isHover, setIsHover] = useState<boolean>(false)
   const handleMouseOver = () => {
@@ -25,8 +24,8 @@ export default function IconInput({
       <input
         id="searchInputFocus"
         type="text"
-        placeholder={placeholder}
         css={searchInput}
+        {...props}
       />
       <div css={iconBg}>
         {whichIcon === 'search' ? (

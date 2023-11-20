@@ -15,6 +15,8 @@ import ForgetPassword_3 from './pages/Login/ForgetPassword_3'
 import SignUp_1 from './pages/Login/SignUp_1'
 import SignUp_2 from './pages/Login/SignUp_2'
 import SignUp_3 from './pages/Login/SignUp_3'
+import ChatbotMessage from './pages/Chatbot/ChatbotMessage'
+import ChatbotSavedChat from './pages/Chatbot/ChatbotSavedChat'
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
         <Route path="/friend" element={<Friend />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/chatbot" element={<Chatbot />} />
+        <Route path="/chatbotmessage" element={<ChatbotMessage/>} />
+        <Route path="/chatbotsavedchat" element={<ChatbotSavedChat/>} />
         <Route path="/more" element={<More />} />
         <Route path="/setting" element={<Setting />} />
         <Route path="/forgetpassword" element={<ForgetPassword />} />
