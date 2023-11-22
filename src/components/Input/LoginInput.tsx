@@ -36,6 +36,10 @@ export default function LoginInput({
     touched: false,
   })
 
+  const resetHandler = () => {
+    setInputState({ value: '', isValid: false, touched: false })
+  }
+
   const inputIconHandler = () => {
     setPwdVisible((prev) => !prev)
     setPwdType((prev) => (prev === 'password' ? 'text' : 'password'))
