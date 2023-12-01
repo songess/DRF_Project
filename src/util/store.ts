@@ -7,6 +7,14 @@ interface User {
   전화번호: string
   비밀번호: string
 }
+interface FriendInfo {
+  name: string
+  major: string
+  id: number
+  img: string
+  favorites: boolean
+  index?: number
+}
 
 export const DUMMY_Users = atom<User[]>([
   {
@@ -32,3 +40,41 @@ export const LoginUser = atom<User>({
   전화번호: '01091459931',
   비밀번호: 'qmfforvldzm',
 })
+
+export const DUMMY_friends = atom<FriendInfo[]>([
+  {
+    name: '철수',
+    major: '컴퓨터공학과',
+    id: 1,
+    img: 'defaultImage.jpeg',
+    favorites: false,
+  },
+  {
+    name: '영희',
+    major: '컴퓨터공학과',
+    id: 2,
+    img: 'defaultImage.jpeg',
+    favorites: false,
+  },
+  {
+    name: '채원',
+    major: '디자인과',
+    id: 4,
+    img: 'defaultImage.jpeg',
+    favorites: true,
+  },
+  {
+    name: '주혁',
+    major: '소프트웨어학과',
+    id: 5,
+    img: 'defaultImage.jpeg',
+    favorites: false,
+  },
+  {
+    name: '학림',
+    major: '화학과',
+    id: 6,
+    img: 'defaultImage.jpeg',
+    favorites: false,
+  },
+])

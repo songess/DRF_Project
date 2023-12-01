@@ -12,6 +12,9 @@ import { useNavigate } from 'react-router-dom'
 import UpdateModal from '../../components/Modal/UpdateModal'
 import IconInput from '../../components/IconInput/IconInput'
 import useHeaderButton from '../../hooks/useHeaderButton'
+import { useAtom } from 'jotai'
+import { DUMMY_friends } from '../../util/store'
+import { set } from 'ol/transform'
 
 interface FriendInfo {
   name: string
@@ -25,43 +28,9 @@ const me = '송은수'
 
 export default function Friend() {
   const navigate = useNavigate()
-  const [DUMMY_FRIENDS, setDUMMY_FRIENDS] = useState<FriendInfo[]>([
-    {
-      name: '철수',
-      major: '컴퓨터공학과',
-      id: 1,
-      img: 'defaultImage.jpeg',
-      favorites: false,
-    },
-    {
-      name: '영희',
-      major: '컴퓨터공학과',
-      id: 2,
-      img: 'defaultImage.jpeg',
-      favorites: false,
-    },
-    {
-      name: '채원',
-      major: '디자인과',
-      id: 4,
-      img: 'defaultImage.jpeg',
-      favorites: true,
-    },
-    {
-      name: '주혁',
-      major: '소프트웨어학과',
-      id: 5,
-      img: 'defaultImage.jpeg',
-      favorites: false,
-    },
-    {
-      name: '학림',
-      major: '화학과',
-      id: 6,
-      img: 'defaultImage.jpeg',
-      favorites: false,
-    },
-  ])
+  const [DUMMY_FRIENDs] = useAtom(DUMMY_friends)
+  const [DUMMY_FRIENDS, setDUMMY_FRIENDS] =
+    useState<FriendInfo[]>(DUMMY_FRIENDs)
   const [DUMMY_FAVORITES_FRIENDS, setDUMMY_FAVORITES_FRIENDS] = useState<
     FriendInfo[]
   >(DUMMY_FRIENDS.filter((friend) => friend.favorites === true))
@@ -72,6 +41,7 @@ export default function Friend() {
     showSearchInput,
   } = useHeaderButton()
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const [isSearchValueEmpty, setIsSearchValueEmpty] = useState<boolean>(true)
   const [selectedFriend, setSelectedFriend] = useState<FriendInfo>({
     name: '',
     major: '',
@@ -96,6 +66,20 @@ export default function Friend() {
       ),
     )
     setIsModalOpen((p) => !p)
+  }
+  const searchFriendHandler = () => {
+    const searchInput = document.querySelector<HTMLInputElement>('#search')
+    if (searchInput) {
+      const searchValue = searchInput.value
+      const searchResult = DUMMY_FRIENDs.filter((friend) =>
+        friend.name.includes(searchValue),
+      )
+      if (searchValue === '') {
+        setDUMMY_FRIENDS(DUMMY_FRIENDs)
+      } else {
+        setDUMMY_FRIENDS(searchResult)
+      }
+    }
   }
   useEffect(() => {
     setDUMMY_FAVORITES_FRIENDS(
@@ -157,7 +141,12 @@ export default function Friend() {
       />
       {showSearchInput && (
         <div css={searchInputStyle}>
-          <IconInput placeholder="검색" whichIcon="search" />
+          <IconInput
+            placeholder="검색"
+            whichIcon="search"
+            id="search"
+            onChange={searchFriendHandler}
+          />
         </div>
       )}
       <section
