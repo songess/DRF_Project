@@ -17,6 +17,7 @@ import SignUp_2 from './pages/Login/SignUp_2'
 import SignUp_3 from './pages/Login/SignUp_3'
 import ChatbotMessage from './pages/Chatbot/ChatbotMessage'
 import ChatbotSavedChat from './pages/Chatbot/ChatbotSavedChat'
+import ReactHookForm from './pages/Login/LoginForm'
 
 function App() {
   return (
@@ -27,8 +28,8 @@ function App() {
         <Route path="/friend" element={<Friend />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/chatbot" element={<Chatbot />} />
-        <Route path="/chatbotmessage" element={<ChatbotMessage/>} />
-        <Route path="/chatbotsavedchat" element={<ChatbotSavedChat/>} />
+        <Route path="/chatbotmessage" element={<ChatbotMessage />} />
+        <Route path="/chatbotsavedchat" element={<ChatbotSavedChat />} />
         <Route path="/more" element={<More />} />
         <Route path="/setting" element={<Setting />} />
         <Route path="/forgetpassword" element={<ForgetPassword />} />
@@ -37,7 +38,7 @@ function App() {
         <Route path="/signup_1" element={<SignUp_1 />} />
         <Route path="/signup_2" element={<SignUp_2 />} />
         <Route path="/signup_3" element={<SignUp_3 />} />
-        <Route path="/setting/:detail" element={<SettingDetail/>} />
+        <Route path="/setting/:detail" element={<SettingDetail />} />
       </Routes>
     </Layout>
   )
