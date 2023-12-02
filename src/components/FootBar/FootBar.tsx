@@ -27,7 +27,7 @@ export default function FootBar() {
 }
 
 const footbarWrapper = css`
-  position: absolute;
+  position: sticky;
   bottom: 0;
   width: 100%;
   background-color: ${theme.color.background};

@@ -10,6 +10,7 @@ export default function More() {
   return (
     <div css={moreWrapper}>
       <MainHeader headerName="더보기" buttonNames={['filter']} onClick={()=>{}}/>
+      <section css={moreSection}>
       <section css={studentCard}>
         <div css={studentCardInfo}>
           <div css={studentCardHeader}>학생증</div>
@@ -20,10 +21,15 @@ export default function More() {
         </div>
         <img src="myProfileImage2.jpeg" alt="프로필" css={profileImage}></img>
       </section>
+      </section>
       <FootBar />
     </div>
   )
 }
+
+const moreSection = css`
+  flex-grow: 1;
+`
 const saintPortal = css`
   display: flex;
   align-items: center;
@@ -47,6 +53,8 @@ const moreWrapper = css`
   position: relative;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column; 
 `
 
 const studentCard = css`

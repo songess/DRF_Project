@@ -18,6 +18,7 @@ import SignUp_3 from './pages/Login/SignUp_3'
 import ChatbotMessage from './pages/Chatbot/ChatbotMessage'
 import ChatbotSavedChat from './pages/Chatbot/ChatbotSavedChat'
 import ReactHookForm from './pages/Login/LoginForm'
+import FindFriend from './pages/Friend/FindFriend'
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/signup_2" element={<SignUp_2 />} />
         <Route path="/signup_3" element={<SignUp_3 />} />
         <Route path="/setting/:detail" element={<SettingDetail />} />
+        <Route path="/findfriend" element={<FindFriend />} />
       </Routes>
     </Layout>
   )

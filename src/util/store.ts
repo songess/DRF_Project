@@ -77,4 +77,32 @@ export const DUMMY_friends = atom<FriendInfo[]>([
     img: 'defaultImage.jpeg',
     favorites: false,
   },
+  {
+    name: '강남',
+    major: '화과',
+    id: 7,
+    img: 'defaultImage.jpeg',
+    favorites: false,
+  },
+  {
+    name: '혜화',
+    major: '화학과',
+    id: 8,
+    img: 'defaultImage.jpeg',
+    favorites: false,
+  },
+  {
+    name: '채은',
+    major: '화학과',
+    id: 9,
+    img: 'defaultImage.jpeg',
+    favorites: true,
+  },
+  {
+    name: '혁주',
+    major: '화학과',
+    id: 10,
+    img: 'defaultImage.jpeg',
+    favorites: true,
+  },
 ])

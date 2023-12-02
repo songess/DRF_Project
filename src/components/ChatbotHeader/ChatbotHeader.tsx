@@ -1,19 +1,24 @@
 import React from 'react'
 import theme from '../../styles/theme'
 import { css } from '@emotion/react'
-import {ReactComponent as ArrowLeft} from "../../assets/image/arrowLeft.svg"
+import { ReactComponent as ArrowLeft } from '../../assets/image/arrowLeft.svg'
 import { useNavigate } from 'react-router-dom'
 
 interface HeaderProps {
-  header: string;
+  header: string
 }
 
-export default function ChatbotHeader({header}:HeaderProps) {
-  const navigate = useNavigate();
+export default function ChatbotHeader({ header }: HeaderProps) {
+  const navigate = useNavigate()
   return (
     <header css={chatbotHeaderWrapper}>
-      <div css={goBack} onClick={()=>{navigate(-1)}}>
-        <ArrowLeft/>
+      <div
+        css={goBack}
+        onClick={() => {
+          navigate(-1)
+        }}
+      >
+        <ArrowLeft />
       </div>
       <p>{header}</p>
     </header>
@@ -26,13 +31,16 @@ const goBack = css`
   transform: translate(-50%, -50%);
   padding: 5px 5px 0 5px;
   border-radius: 5px;
-  &:hover{
+  &:hover {
     background-color: ${theme.color.background};
   }
 `
 
 const chatbotHeaderWrapper = css`
-  position: relative;
+  position: absolute;
+  top: 0;
+  left:0;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

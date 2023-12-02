@@ -7,8 +7,8 @@ import ChatListItem from './ChatListItem'
 import useHeaderButton from '../../hooks/useHeaderButton'
 import IconInput from '../../components/IconInput/IconInput'
 import UpdateModal from '../../components/Modal/UpdateModal'
-import {ReactComponent as ChatSvg} from "../../assets/image/chat.svg"
-import {ReactComponent as TeamChatSvg} from "../../assets/image/teamChat.svg"
+import { ReactComponent as ChatSvg } from '../../assets/image/chat.svg'
+import { ReactComponent as TeamChatSvg } from '../../assets/image/teamChat.svg'
 
 interface ChatType {
   name: string
@@ -55,7 +55,7 @@ export default function Chat() {
   } = useHeaderButton()
   return (
     <div css={chatWrapper}>
-       <UpdateModal
+      <UpdateModal
         isOpen={isChatModalOpen}
         onClear={() => setIsChatModalOpen((p) => !p)}
       >
@@ -76,30 +76,38 @@ export default function Chat() {
         buttonNames={['search', 'chat', 'filter']}
         onClick={headerClickHandler}
       />
-      {showSearchInput && (
-        <div css={searchInputStyle}>
-          <IconInput placeholder="검색" whichIcon="search" />
-        </div>
-      )}
-      {DUMMY_CHAT.map((chat) => (
-        <ChatListItem
-          image={chat.image}
-          lastMessage={chat.lastMessage}
-          name={chat.name}
-          numberOfUnreadMessage={chat.numberOfUnreadMessage}
-          time={chat.time.slice(0, chat.time.length - 3)}
-          key={chat.id}
-        />
-      ))}
+      <section css={chatSection}>
+        {showSearchInput && (
+          <div css={searchInputStyle}>
+            <IconInput placeholder="검색" whichIcon="search" />
+          </div>
+        )}
+        {DUMMY_CHAT.map((chat) => (
+          <ChatListItem
+            image={chat.image}
+            lastMessage={chat.lastMessage}
+            name={chat.name}
+            numberOfUnreadMessage={chat.numberOfUnreadMessage}
+            time={chat.time.slice(0, chat.time.length - 3)}
+            key={chat.id}
+          />
+        ))}
+      </section>
       <FootBar />
     </div>
   )
 }
 
+const chatSection = css`
+  flex-grow: 1;
+`
+
 const chatWrapper = css`
   position: relative;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 `
 
 const searchInputStyle = css`

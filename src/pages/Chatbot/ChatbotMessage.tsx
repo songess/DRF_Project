@@ -37,9 +37,9 @@ const DUMMY_CHATBOTCHAT: ChatbotChat[] = [
 export default function ChatbotMessage() {
   return (
     <div css={chatbotMessageWrapper}>
-      <ChatbotHeader header='AI Chatbot'/>
+      <ChatbotHeader header="AI Chatbot" />
       <div css={chatbotMessageStyle}>
-        <AiChatbot css={aiChatbotStyle}/>
+        <AiChatbot css={aiChatbotStyle} />
         {DUMMY_CHATBOTCHAT.map((chat) => (
           <ChatbotMessageItem
             message={chat.message}
@@ -49,11 +49,11 @@ export default function ChatbotMessage() {
           />
         ))}
       </div>
-      <MessageInput placeholder='메세지 보내기 ...'/>
+      <MessageInput placeholder="메세지 보내기 ..." />
     </div>
   )
 }
-const aiChatbotStyle =css`
+const aiChatbotStyle = css`
   align-self: center;
   padding: 20px;
 `
@@ -70,4 +70,6 @@ const chatbotMessageWrapper = css`
   height: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
+  padding-top: 90px;
 `

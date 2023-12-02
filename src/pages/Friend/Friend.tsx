@@ -81,6 +81,9 @@ export default function Friend() {
       }
     }
   }
+  const findFriendHandler = () => {
+    navigate('/findfriend')
+  }
   useEffect(() => {
     setDUMMY_FAVORITES_FRIENDS(
       DUMMY_FRIENDS.filter((friend) => friend.favorites),
@@ -128,7 +131,7 @@ export default function Friend() {
             <Notebook />
             <p>이름으로 친구추가</p>
           </div>
-          <div css={modalCard}>
+          <div css={modalCard} onClick={findFriendHandler}>
             <Card />
             <p>학번으로 친구추가</p>
           </div>
@@ -139,54 +142,58 @@ export default function Friend() {
         buttonNames={['search', 'adduser', 'filter']}
         onClick={headerClickHandler}
       />
-      {showSearchInput && (
-        <div css={searchInputStyle}>
-          <IconInput
-            placeholder="검색"
-            whichIcon="search"
-            id="search"
-            onChange={searchFriendHandler}
-          />
-        </div>
-      )}
-      <section
-        css={myProfile}
-        onClick={() => {
-          navigate('/setting')
-        }}
-      >
-        <img src="myProfileImage2.jpeg" alt="프로필" css={myProfileImage} />
-        <p>{me}</p>
-      </section>
-      <hr />
-      <section css={favorites}>
-        <p css={numberOfFavorites}>즐겨찾기 {DUMMY_FAVORITES_FRIENDS.length}</p>
-        {DUMMY_FAVORITES_FRIENDS.map((friend, idx) => (
-          <UserListCard
-            image={friend.img}
-            major={friend.major}
-            name={friend.name}
-            key={friend.id}
-            onClick={() => {
-              cardClickHandler(friend, idx)
-            }}
-          />
-        ))}
-      </section>
-      <hr />
-      <section css={friends}>
-        <p css={numberOfFriends}>친구 {DUMMY_FRIENDS.length}</p>
-        {DUMMY_FRIENDS.map((friend, idx) => (
-          <UserListCard
-            image={friend.img}
-            major={friend.major}
-            name={friend.name}
-            key={friend.id}
-            onClick={() => {
-              cardClickHandler(friend, friend.index ?? 0)
-            }}
-          />
-        ))}
+      <section css={friendSection}>
+        {showSearchInput && (
+          <div css={searchInputStyle}>
+            <IconInput
+              placeholder="검색"
+              whichIcon="search"
+              id="search"
+              onChange={searchFriendHandler}
+            />
+          </div>
+        )}
+        <section
+          css={myProfile}
+          onClick={() => {
+            navigate('/setting')
+          }}
+        >
+          <img src="myProfileImage2.jpeg" alt="프로필" css={myProfileImage} />
+          <p>{me}</p>
+        </section>
+        <hr />
+        <section css={favorites}>
+          <p css={numberOfFavorites}>
+            즐겨찾기 {DUMMY_FAVORITES_FRIENDS.length}
+          </p>
+          {DUMMY_FAVORITES_FRIENDS.map((friend, idx) => (
+            <UserListCard
+              image={friend.img}
+              major={friend.major}
+              name={friend.name}
+              key={friend.id}
+              onClick={() => {
+                cardClickHandler(friend, idx)
+              }}
+            />
+          ))}
+        </section>
+        <hr />
+        <section css={friends}>
+          <p css={numberOfFriends}>친구 {DUMMY_FRIENDS.length}</p>
+          {DUMMY_FRIENDS.map((friend, idx) => (
+            <UserListCard
+              image={friend.img}
+              major={friend.major}
+              name={friend.name}
+              key={friend.id}
+              onClick={() => {
+                cardClickHandler(friend, friend.index ?? 0)
+              }}
+            />
+          ))}
+        </section>
       </section>
       <FootBar />
     </div>
@@ -242,6 +249,8 @@ const friendWrapper = css`
   position: relative;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
   overflow: auto;
   hr {
     background-color: ${theme.color.background};
@@ -283,4 +292,7 @@ const modalCard = css`
 
 const searchInputStyle = css`
   padding: 10px 20px;
+`
+const friendSection = css`
+  flex-grow: 1;
 `

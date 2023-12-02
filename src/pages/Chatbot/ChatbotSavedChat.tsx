@@ -18,7 +18,7 @@ const DUMMY_SAVEDCHAT: SavedChat[] = [
 
 export default function ChatbotSavedChat() {
   return (
-    <div>
+    <div css={cbsavedChatWrapper}>
       <ChatbotHeader header="저장된 기록" />
       {DUMMY_SAVEDCHAT.map((chat) => (
         <ChatbotSavedChatItem
@@ -30,3 +30,8 @@ export default function ChatbotSavedChat() {
     </div>
   )
 }
+
+const cbsavedChatWrapper = css`
+  position: relative;
+  padding-top: 90px;
+`
