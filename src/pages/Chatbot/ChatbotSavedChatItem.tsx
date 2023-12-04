@@ -30,6 +30,7 @@ const savedChatDateStyle = css`
 `
 
 const savedChatWrapper = css`
+  cursor: pointer;
   position: relative;
   padding: 40px 20px;
   margin: 20px;
@@ -40,5 +41,8 @@ const savedChatWrapper = css`
     font-size: ${theme.textStyle.title_medium.font_size};
     line-height: ${theme.textStyle.title_medium.line_height};
     flex-grow: 1;
+  }
+  &:hover {
+    background-color: ${theme.color.background};
   }
 `

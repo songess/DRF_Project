@@ -27,7 +27,7 @@ export default function Setting() {
         <div
           css={goBackButtonContainer}
           onClick={() => {
-            navigate(-1)
+            navigate('/friend')
           }}
         >
           <ArrowLeft />
@@ -70,7 +70,7 @@ export default function Setting() {
           로그아웃
         </p>
       </div>
-      <FootBar />
+      {/* <FootBar /> */}
     </div>
   )
 }
@@ -89,7 +89,7 @@ const settingFooter = css`
   width: 100%;
   padding: 30px;
   position: absolute;
-  bottom: 58px;
+  bottom: 0;
   display: flex;
   justify-content: space-between;
   font-size: ${theme.textStyle.title_medium.font_size};

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Input from '../../components/Input/Input'
 import { css } from '@emotion/react'
@@ -11,7 +11,7 @@ import { LoginUser } from '../../util/store'
 export default function SettingDetail() {
   const [DUMMY_USER, setDUMMY_USER] = useAtom(LoginUser)
   const { detail } = useParams()
-  const _detail= detail as string;
+  const _detail = detail as string
   const navigate = useNavigate()
   const [userSettingChange, setUserSettingChange] = useState<string>('')
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,8 +19,23 @@ export default function SettingDetail() {
   }
   const settingLoginUser = () => {
     setDUMMY_USER((prev) => ({ ...prev, [_detail]: userSettingChange }))
-    navigate(-1);
+    navigate('/setting', { replace: true })
   }
+
+  const enterHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      settingLoginUser()
+    }
+  }
+
+  useEffect(() => {
+    const settingDetail =
+      document.querySelector<HTMLInputElement>('#settingDetail')
+    if (settingDetail) {
+      settingDetail.focus()
+    }
+  }, [])
+
   return (
     <div css={settingDetailWrapper}>
       <header css={settingDetailHeader}>
@@ -39,12 +54,14 @@ export default function SettingDetail() {
       </header>
       <Input
         isIconVisible={false}
+        id="settingDetail"
         isValid={true}
         touched={false}
         type="text"
         placeholder={`${detail}을 입력하세요`}
         value={userSettingChange}
         onChange={inputChangeHandler}
+        onKeyDown={enterHandler}
       />
     </div>
   )

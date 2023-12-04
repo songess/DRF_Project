@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { css } from '@emotion/react'
 import theme from '../../styles/theme'
 import FootBar from '../../components/FootBar/FootBar'
@@ -53,6 +53,12 @@ export default function Chat() {
     setIsChatModalOpen,
     isChatModalOpen,
   } = useHeaderButton()
+  useEffect(() => {
+    const searchInput = document.querySelector<HTMLInputElement>('#search')
+    if (searchInput) {
+      searchInput.focus()
+    }
+  }, [showSearchInput])
   return (
     <div css={chatWrapper}>
       <UpdateModal
@@ -79,7 +85,7 @@ export default function Chat() {
       <section css={chatSection}>
         {showSearchInput && (
           <div css={searchInputStyle}>
-            <IconInput placeholder="검색" whichIcon="search" />
+            <IconInput placeholder="검색" whichIcon="search" id="search"/>
           </div>
         )}
         {DUMMY_CHAT.map((chat) => (

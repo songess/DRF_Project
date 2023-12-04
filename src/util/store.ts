@@ -98,11 +98,21 @@ export const DUMMY_friends = atom<FriendInfo[]>([
     img: 'defaultImage.jpeg',
     favorites: true,
   },
+])
+
+export const DUMMY_Allusers = atom<User[]>([
   {
-    name: '혁주',
-    major: '화학과',
-    id: 10,
-    img: 'defaultImage.jpeg',
-    favorites: true,
+    이름: '서강대',
+    이메일: 'songess@naver.com',
+    학번: '20200000',
+    전화번호: '01091459931',
+    비밀번호: 'qmfforvldzm',
+  },
+  {
+    이름: '서강',
+    이메일: 'songess@naver.com',
+    학번: '20201234',
+    전화번호: '01091459931',
+    비밀번호: 'qmfforvldzm',
   },
 ])

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState, LegacyRef } from 'react'
 import { css } from '@emotion/react'
 import theme from '../../styles/theme'
 import FootBar from '../../components/FootBar/FootBar'
@@ -8,13 +8,14 @@ import UserListCard from '../../components/UserListCard/UserListCard'
 import Modal from '../../components/Modal/Modal'
 import Button from '../../components/Button/Button'
 import MainHeader from '../../components/MainHeader/MainHeader'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import UpdateModal from '../../components/Modal/UpdateModal'
 import IconInput from '../../components/IconInput/IconInput'
 import useHeaderButton from '../../hooks/useHeaderButton'
 import { useAtom } from 'jotai'
 import { DUMMY_friends } from '../../util/store'
 import { set } from 'ol/transform'
+import { motion } from 'framer-motion'
 
 interface FriendInfo {
   name: string
@@ -81,14 +82,33 @@ export default function Friend() {
       }
     }
   }
-  const findFriendHandler = () => {
-    navigate('/findfriend')
+  const findFriendHandler = (whichtoFind: string) => {
+    if (whichtoFind === 'name') {
+      navigate('/findfriend/이름')
+    } else {
+      navigate('/findfriend/학번')
+    }
   }
+  const inputRef = useRef<HTMLInputElement>(null)
+  useEffect(() => {
+    // const searchInput = document.querySelector<HTMLInputElement>('#search')
+    // if (searchInput) {
+    //   searchInput.focus()
+    // }
+    // setTimeout(() => {
+    //   searchInput!.focus()
+    // }, 1)
+    setTimeout(() => {
+      inputRef.current!.focus()
+    }, 1)
+  }, [showSearchInput])
+
   useEffect(() => {
     setDUMMY_FAVORITES_FRIENDS(
       DUMMY_FRIENDS.filter((friend) => friend.favorites),
     )
   }, [DUMMY_FRIENDS])
+
   return (
     <div css={friendWrapper}>
       <Modal isOpen={isModalOpen} onClear={() => setIsModalOpen((p) => !p)}>
@@ -127,11 +147,21 @@ export default function Friend() {
       >
         <UpdateModal.Header>친구추가</UpdateModal.Header>
         <UpdateModal.Content>
-          <div css={modalCard}>
+          <div
+            css={modalCard}
+            onClick={() => {
+              findFriendHandler('name')
+            }}
+          >
             <Notebook />
             <p>이름으로 친구추가</p>
           </div>
-          <div css={modalCard} onClick={findFriendHandler}>
+          <div
+            css={modalCard}
+            onClick={() => {
+              findFriendHandler('stdId')
+            }}
+          >
             <Card />
             <p>학번으로 친구추가</p>
           </div>
@@ -143,16 +173,24 @@ export default function Friend() {
         onClick={headerClickHandler}
       />
       <section css={friendSection}>
-        {showSearchInput && (
-          <div css={searchInputStyle}>
-            <IconInput
-              placeholder="검색"
-              whichIcon="search"
-              id="search"
-              onChange={searchFriendHandler}
-            />
-          </div>
-        )}
+        <motion.div
+          css={searchInputStyle}
+          animate={
+            showSearchInput
+              ? { opacity: 1, y: 0, display: 'block', width: '100%' }
+              : { opacity: 0, y: -50, display: 'none', width: '0%' }
+          }
+        >
+          <IconInput
+            placeholder="검색"
+            whichIcon="search"
+            id="search"
+            onChange={searchFriendHandler}
+            autoFocus
+            ref={inputRef}
+          />
+        </motion.div>
+
         <section
           css={myProfile}
           onClick={() => {

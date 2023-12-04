@@ -40,7 +40,7 @@ function App() {
         <Route path="/signup_2" element={<SignUp_2 />} />
         <Route path="/signup_3" element={<SignUp_3 />} />
         <Route path="/setting/:detail" element={<SettingDetail />} />
-        <Route path="/findfriend" element={<FindFriend />} />
+        <Route path="/findfriend/:whichtofind" element={<FindFriend />} />
       </Routes>
     </Layout>
   )

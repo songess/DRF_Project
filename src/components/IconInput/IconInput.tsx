@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, forwardRef, LegacyRef, useRef } from 'react'
 import theme from '../../styles/theme'
 import { css } from '@emotion/react'
 import { ReactComponent as SearchSvg } from '../../assets/image/search.svg'
@@ -8,43 +8,45 @@ interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   whichIcon: 'search' | 'check'
 }
 
-export default function IconInput({
-  whichIcon,
-  ...props
-}: SearchInputProps) {
-  const [isHover, setIsHover] = useState<boolean>(false)
-  const handleMouseOver = () => {
-    setIsHover(true)
-  }
-  const handleMouseOut = () => {
-    setIsHover(false)
-  }
-  return (
-    <label htmlFor="searchInputFocus" css={searchInputWrapper}>
-      <input
-        id="searchInputFocus"
-        type="text"
-        css={searchInput}
-        {...props}
-      />
-      <div css={iconBg}>
-        {whichIcon === 'search' ? (
-          <SearchSvg
-            style={isHover ? { color: 'black' } : { color: 'gray' }}
-            onMouseOver={handleMouseOver}
-            onMouseOut={handleMouseOut}
-          />
-        ) : (
-          <CheckSvg
-            style={isHover ? { color: 'black' } : { color: 'gray' }}
-            onMouseOver={handleMouseOver}
-            onMouseOut={handleMouseOut}
-          />
-        )}
-      </div>
-    </label>
-  )
-}
+const IconInput = forwardRef(
+  ({ whichIcon, ...props }: SearchInputProps, ref) => {
+    const [isHover, setIsHover] = useState<boolean>(false)
+    const handleMouseOver = () => {
+      setIsHover(true)
+    }
+    const handleMouseOut = () => {
+      setIsHover(false)
+    }
+    return (
+      <label htmlFor="searchInputFocus" css={searchInputWrapper}>
+        <input
+          id="searchInputFocus"
+          type="text"
+          css={searchInput}
+          {...props}
+          ref={ref as LegacyRef<HTMLInputElement>}
+        />
+        <div css={iconBg}>
+          {whichIcon === 'search' ? (
+            <SearchSvg
+              style={isHover ? { color: 'black' } : { color: 'gray' }}
+              onMouseOver={handleMouseOver}
+              onMouseOut={handleMouseOut}
+            />
+          ) : (
+            <CheckSvg
+              style={isHover ? { color: 'black' } : { color: 'gray' }}
+              onMouseOver={handleMouseOver}
+              onMouseOut={handleMouseOut}
+            />
+          )}
+        </div>
+      </label>
+    )
+  },
+)
+
+export default IconInput
 
 const searchInputWrapper = css`
   width: 100%;
