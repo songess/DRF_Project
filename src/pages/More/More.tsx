@@ -5,8 +5,11 @@ import MainHeader from '../../components/MainHeader/MainHeader'
 import FootBar from '../../components/FootBar/FootBar'
 import { ReactComponent as ArrowRight } from '../../assets/image/arrowRightCircle.svg'
 import { Link } from 'react-router-dom'
+import { useAtom } from 'jotai'
+import { LoginUser } from '../../util/store'
 
 export default function More() {
+  const [Loginuser] =useAtom(LoginUser);
   return (
     <div css={moreWrapper}>
       <MainHeader headerName="더보기" buttonNames={['filter']} onClick={()=>{}}/>
@@ -19,7 +22,7 @@ export default function More() {
             <ArrowRight />
           </Link>
         </div>
-        <img src="myProfileImage2.jpeg" alt="프로필" css={profileImage}></img>
+        <img src={Loginuser.img} alt="프로필" css={profileImage}></img>
       </section>
       </section>
       <FootBar />

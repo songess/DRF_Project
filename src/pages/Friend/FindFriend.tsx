@@ -12,15 +12,6 @@ import {
 } from '../../util/store'
 import Button from '../../components/Button/Button'
 
-interface FriendInfo {
-  name: string
-  major: string
-  id: number
-  img: string
-  favorites: boolean
-  index?: number
-}
-
 export default function FindFriend() {
   const navigate = useNavigate()
   const params = useParams().whichtofind

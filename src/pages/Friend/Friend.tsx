@@ -13,7 +13,7 @@ import UpdateModal from '../../components/Modal/UpdateModal'
 import IconInput from '../../components/IconInput/IconInput'
 import useHeaderButton from '../../hooks/useHeaderButton'
 import { useAtom } from 'jotai'
-import { DUMMY_friends, type UserInterface } from '../../util/store'
+import { DUMMY_friends, LoginUser, type UserInterface } from '../../util/store'
 import { set } from 'ol/transform'
 import { motion } from 'framer-motion'
 
@@ -21,6 +21,7 @@ const me = '송은수'
 
 export default function Friend() {
   const navigate = useNavigate()
+  const [Loginuser]=useAtom(LoginUser);
   const [DUMMY_FRIENDs] = useAtom(DUMMY_friends)
   const [DUMMY_FRIENDS, setDUMMY_FRIENDS] =
     useState<UserInterface[]>(DUMMY_FRIENDs)
@@ -192,8 +193,8 @@ export default function Friend() {
             navigate('/setting')
           }}
         >
-          <img src="myProfileImage2.jpeg" alt="프로필" css={myProfileImage} />
-          <p>{me}</p>
+          <img src={Loginuser.img} alt="프로필" css={myProfileImage} />
+          <p>{Loginuser.name}</p>
         </section>
         <hr />
         <section css={favorites}>

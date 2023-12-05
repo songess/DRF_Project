@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react'
 import { css } from '@emotion/react'
 import theme from '../../styles/theme'
-import FootBar from '../../components/FootBar/FootBar'
 import { ReactComponent as ArrowLeft } from '../../assets/image/arrowLeft.svg'
 import { ReactComponent as Edit } from '../../assets/image/edit.svg'
 import SettingList from './SettingList'
@@ -100,11 +99,7 @@ export default function Setting() {
       </header>
       <section css={settingProfile}>
         <div css={settingProfleDetail}>
-          <img
-            src="myProfileImage2.jpeg"
-            alt="profile"
-            css={settingProfileImage}
-          />
+          <img src={DUMMY_USER.img} alt="profile" css={settingProfileImage} />
           <Edit css={editImage} />
         </div>
       </section>

@@ -23,7 +23,7 @@ export default function ForgetPassword_3() {
       <ShowStage3 />
       <Mail />
       <div css={fp3HeaderStyle}>비밀번호 초기화</div>
-      <div css={fp3ContentStyle}>새로만들 비밀번호를 입력해주세요</div>
+      <div css={fp3ContentStyle}>새로 만들 비밀번호를 입력해주세요</div>
       <PasswordValidForm />
       <Button
         backgroundColor="primary"

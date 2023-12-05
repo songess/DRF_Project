@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { css } from '@emotion/react'
 import theme from '../../styles/theme'
 import FootBar from '../../components/FootBar/FootBar'
@@ -9,6 +9,7 @@ import IconInput from '../../components/IconInput/IconInput'
 import UpdateModal from '../../components/Modal/UpdateModal'
 import { ReactComponent as ChatSvg } from '../../assets/image/chat.svg'
 import { ReactComponent as TeamChatSvg } from '../../assets/image/teamChat.svg'
+import { useNavigate } from 'react-router-dom'
 
 interface ChatType {
   name: string
@@ -53,6 +54,23 @@ export default function Chat() {
     setIsChatModalOpen,
     isChatModalOpen,
   } = useHeaderButton()
+  const navigate = useNavigate()
+  const [DUMMY_SHOWCHAT, setDUMMY_SHOWCHAT] = useState<ChatType[]>(DUMMY_CHAT)
+  const searchChatHandler = () => {
+    let searchInput = document.querySelector<HTMLInputElement>('#search')
+    if (searchInput) {
+      console.log('hello')
+      const searchValue = searchInput.value
+      const searchResult = DUMMY_CHAT.filter((friend) => {
+        return friend.name.includes(searchValue)
+      })
+      if (searchValue === '') {
+        setDUMMY_SHOWCHAT(DUMMY_CHAT)
+      } else {
+        setDUMMY_SHOWCHAT(searchResult)
+      }
+    }
+  }
   useEffect(() => {
     const searchInput = document.querySelector<HTMLInputElement>('#search')
     if (searchInput) {
@@ -67,7 +85,12 @@ export default function Chat() {
       >
         <UpdateModal.Header>새로운 채팅</UpdateModal.Header>
         <UpdateModal.Content>
-          <div css={modalCard}>
+          <div
+            css={modalCard}
+            onClick={() => {
+              navigate('/newchat')
+            }}
+          >
             <ChatSvg />
             <p>일반 채팅</p>
           </div>
@@ -85,10 +108,15 @@ export default function Chat() {
       <section css={chatSection}>
         {showSearchInput && (
           <div css={searchInputStyle}>
-            <IconInput placeholder="검색" whichIcon="search" id="search"/>
+            <IconInput
+              placeholder="검색"
+              whichIcon="search"
+              id="search"
+              onChange={searchChatHandler}
+            />
           </div>
         )}
-        {DUMMY_CHAT.map((chat) => (
+        {DUMMY_SHOWCHAT.map((chat) => (
           <ChatListItem
             image={chat.image}
             lastMessage={chat.lastMessage}

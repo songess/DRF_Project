@@ -8,6 +8,7 @@ import Button from '../../components/Button/Button'
 import { useNavigate } from 'react-router-dom'
 import Modal from '../../components/Modal/Modal'
 import { useModal } from '../../hooks/useModal'
+import Input from '../../components/Input/Input'
 
 export default function ForgetPassword_2() {
   const ref = useRef()
@@ -48,12 +49,14 @@ export default function ForgetPassword_2() {
         <br />
         5자리를 입력해주세요.
       </div>
-      <div css={fp2OTPBoxStyle}>
-        <input css={otpBox}></input>
-        <input css={otpBox}></input>
-        <input css={otpBox}></input>
-        <input css={otpBox}></input>
-        <input css={otpBox}></input>
+      <div css={inputStyle}>
+        <Input
+          isIconVisible={false}
+          isValid={true}
+          touched={false}
+          type="text"
+          placeholder="OTP 5자리를 입력하세요"
+        />
       </div>
       <Button
         backgroundColor="primary"
@@ -69,6 +72,9 @@ export default function ForgetPassword_2() {
     </section>
   )
 }
+const inputStyle = css`
+`
+
 const goBack = css`
   position: absolute;
   padding: 5px 5px 0 5px;

@@ -38,21 +38,14 @@ export default function SignUpForm({
   const [pwdVisible, setPwdVisible] = useState<boolean>(false)
 
   const submitHandler: SubmitHandler<FormInput> = (data) => {
-    const loginUser = DUMMY_USER.filter(
-      (user) => user.email === data.email && user.password === data.password,
-    )
-    if (loginUser.length === 0) {
-      toggle()
-    } else {
-      navigate('/friend')
-    }
+    navigate('/signup_1')
   }
 
   return (
     <form css={formWrapper} onSubmit={handleSubmit(submitHandler)}>
       <section css={sectionStyle}>
         <div css={inputWrapper}>
-          <label htmlFor="0" css={labelStyle(isFocused1)}>
+          <label htmlFor="0" css={labelStyle(isFocused0)}>
             <input
               {...register('name', { required: true })}
               placeholder="이름"
@@ -134,7 +127,7 @@ export default function SignUpForm({
           type="submit"
           disabled={!isValid}
         >
-          로그인
+          회원가입
         </Button>
         <div css={loginGrid}>또는</div>
         <Button
@@ -146,7 +139,7 @@ export default function SignUpForm({
             modeSwitchHandler()
           }}
         >
-          회원가입
+          로그인
         </Button>
       </footer>
     </form>

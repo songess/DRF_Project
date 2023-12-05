@@ -7,7 +7,7 @@ import { ReactComponent as NonVisibleSvg } from '../../assets/image/nonVisiblePw
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAtom } from 'jotai'
-import { DUMMY_Users } from '../../util/store'
+import { DUMMY_Users, LoginUser } from '../../util/store'
 
 interface LoginFormProps {
   toggle: () => void
@@ -30,6 +30,7 @@ export default function ReactHookForm({
   } = useForm<FormInput>()
   //const onSubmit: SubmitHandler<FormInput> = (data) => console.log(data)
   const [DUMMY_USER] = useAtom(DUMMY_Users)
+  const [Loginuser,setLoginuser]=useAtom(LoginUser);
   const navigate = useNavigate()
   const [isFocused1, setIsFocused1] = useState<boolean>(false)
   const [isFocused2, setIsFocused2] = useState<boolean>(false)
@@ -42,6 +43,7 @@ export default function ReactHookForm({
     if (loginUser.length === 0) {
       toggle()
     } else {
+      setLoginuser(loginUser[0])
       navigate('/friend')
     }
   }
