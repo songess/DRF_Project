@@ -13,27 +13,19 @@ import UpdateModal from '../../components/Modal/UpdateModal'
 import IconInput from '../../components/IconInput/IconInput'
 import useHeaderButton from '../../hooks/useHeaderButton'
 import { useAtom } from 'jotai'
-import { DUMMY_friends } from '../../util/store'
+import { DUMMY_friends, type UserInterface } from '../../util/store'
 import { set } from 'ol/transform'
 import { motion } from 'framer-motion'
 
-interface FriendInfo {
-  name: string
-  major: string
-  id: number
-  img: string
-  favorites: boolean
-  index?: number
-}
 const me = '송은수'
 
 export default function Friend() {
   const navigate = useNavigate()
   const [DUMMY_FRIENDs] = useAtom(DUMMY_friends)
   const [DUMMY_FRIENDS, setDUMMY_FRIENDS] =
-    useState<FriendInfo[]>(DUMMY_FRIENDs)
+    useState<UserInterface[]>(DUMMY_FRIENDs)
   const [DUMMY_FAVORITES_FRIENDS, setDUMMY_FAVORITES_FRIENDS] = useState<
-    FriendInfo[]
+    UserInterface[]
   >(DUMMY_FRIENDS.filter((friend) => friend.favorites === true))
   const {
     headerClickHandler,
@@ -42,17 +34,20 @@ export default function Friend() {
     showSearchInput,
   } = useHeaderButton()
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-  const [isSearchValueEmpty, setIsSearchValueEmpty] = useState<boolean>(true)
-  const [selectedFriend, setSelectedFriend] = useState<FriendInfo>({
+  const [selectedFriend, setSelectedFriend] = useState<UserInterface>({
     name: '',
     major: '',
     id: 0,
     img: '',
     favorites: false,
     index: 0,
+    email: '',
+    password: '',
+    phoneNumber: '',
+    studentId: '',
   })
 
-  const cardClickHandler = (friend: FriendInfo, idx: number) => {
+  const cardClickHandler = (friend: UserInterface, idx: number) => {
     setSelectedFriend((p) => ({ ...p, ...friend, index: idx }))
     setIsModalOpen((p) => !p)
   }
@@ -325,6 +320,7 @@ const modalCard = css`
   }
   &:hover {
     background-color: ${theme.color.background};
+    cursor: pointer;
   }
 `
 

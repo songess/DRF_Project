@@ -134,5 +134,6 @@ const modalCard = css`
   }
   &:hover {
     background-color: ${theme.color.background};
+    cursor: pointer;
   }
 `

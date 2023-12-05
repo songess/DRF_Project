@@ -3,37 +3,64 @@ import theme from '../../styles/theme'
 import { css } from '@emotion/react'
 import Header from '../../components/ChatbotHeader/ChatbotHeader'
 import IconInput from '../../components/IconInput/IconInput'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useAtom } from 'jotai'
-import { DUMMY_Allusers } from '../../util/store'
+import {
+  DUMMY_Allusers,
+  DUMMY_friends,
+  type UserInterface,
+} from '../../util/store'
 import Button from '../../components/Button/Button'
 
-interface User {
-  이름: string
-  이메일: string
-  학번: string
-  전화번호: string
-  비밀번호: string
+interface FriendInfo {
+  name: string
+  major: string
+  id: number
+  img: string
+  favorites: boolean
+  index?: number
 }
 
 export default function FindFriend() {
+  const navigate = useNavigate()
   const params = useParams().whichtofind
-  const [DUMMY_ALLFRIENDS] = useAtom<User[]>(DUMMY_Allusers)
-  const [FindedUser, setFindedUser] = useState<User[]>([])
+  const [DUMMY_ALLUSER] = useAtom<UserInterface[]>(DUMMY_Allusers)
+  const [DUMMY_FRIENDS, setDUMMY_FRIENDS] = useAtom(DUMMY_friends)
+  const [isAlreadyFriends, setIsAlreadyFriends] = useState<boolean>(false)
+  const [FindedUser, setFindedUser] = useState<UserInterface[]>([])
   const findFriendHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
-    console.log(value)
     if (params === '이름') {
-      const findResult = DUMMY_ALLFRIENDS.filter(
-        (friend) => friend.이름 === value,
-      )
+      const findResult = DUMMY_ALLUSER.filter((friend) => friend.name === value)
       setFindedUser(findResult)
+      DUMMY_FRIENDS.forEach((friend) => {
+        if (findResult.length > 0 && friend.name === findResult[0].name) {
+          //동명이인 없음 가정
+          setIsAlreadyFriends(true)
+        }
+      })
     } else {
       //params==='학번'
-      const findResult = DUMMY_ALLFRIENDS.filter(
-        (friend) => friend.학번 === value,
+      const findResult = DUMMY_ALLUSER.filter(
+        (friend) => friend.studentId === value,
       )
       setFindedUser(findResult)
+      DUMMY_FRIENDS.forEach((friend) => {
+        if (findResult.length > 0 && friend.name === findResult[0].name) {
+          setIsAlreadyFriends(true)
+        }
+      })
+    }
+    if (value === '') {
+      setIsAlreadyFriends(false)
+    }
+  }
+  const buttonHandler = () => {
+    if (!isAlreadyFriends) {
+      setIsAlreadyFriends(true)
+      setDUMMY_FRIENDS((p: UserInterface[]) => [...p, FindedUser[0]])
+    } else {
+      navigate('/friend')
     }
   }
   useEffect(() => {
@@ -51,12 +78,17 @@ export default function FindFriend() {
         placeholder={`${params}를 입력하세요`}
         onChange={findFriendHandler}
       />
-      {FindedUser.map((friend: User) => (
-        <div css={friendCard} key={friend.전화번호}>
-          <img src="/defaultImage.jpeg" alt="profile" width={50} height={50}/>
-          <div css={friendName}>{friend.이름}</div>
-          <Button backgroundColor="primary" color="white" size="medium">
-            친구추가
+      {FindedUser.map((friend: UserInterface) => (
+        <div css={friendCard} key={friend.phoneNumber}>
+          <img src="/defaultImage.jpeg" alt="profile" width={50} height={50} />
+          <div css={friendName}>{friend.name}</div>
+          <Button
+            backgroundColor="primary"
+            color="white"
+            size="medium"
+            onClick={buttonHandler}
+          >
+            {isAlreadyFriends ? '1:1채팅' : '친구추가'}
           </Button>
         </div>
       ))}

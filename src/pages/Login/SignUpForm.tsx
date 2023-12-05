@@ -39,7 +39,7 @@ export default function SignUpForm({
 
   const submitHandler: SubmitHandler<FormInput> = (data) => {
     const loginUser = DUMMY_USER.filter(
-      (user) => user.이메일 === data.email && user.비밀번호 === data.password,
+      (user) => user.email === data.email && user.password === data.password,
     )
     if (loginUser.length === 0) {
       toggle()

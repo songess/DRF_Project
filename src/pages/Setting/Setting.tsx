@@ -8,6 +8,8 @@ import SettingList from './SettingList'
 import { useNavigate } from 'react-router-dom'
 import { LoginUser } from '../../util/store'
 import { useAtom } from 'jotai'
+import Modal from '../../components/Modal/Modal'
+import Button from '../../components/Button/Button'
 
 export default function Setting() {
   const [DUMMY_USER] = useAtom(LoginUser)
@@ -15,14 +17,76 @@ export default function Setting() {
   const values = Object.values(DUMMY_USER)
   let DUMMY_SETTINGS: { title: string; content: string; id: number }[] = []
   for (let i = 0; i < keys.length; i++) {
-    DUMMY_SETTINGS = [
-      ...DUMMY_SETTINGS,
-      { title: keys[i], content: values[i], id: i + 1 },
-    ]
+    switch (keys[i]) {
+      case 'name':
+        DUMMY_SETTINGS = [
+          ...DUMMY_SETTINGS,
+          { title: '이름', content: values[i], id: i + 1 },
+        ]
+        break
+      case 'email':
+        DUMMY_SETTINGS = [
+          ...DUMMY_SETTINGS,
+          { title: '이메일', content: values[i], id: i + 1 },
+        ]
+        break
+      case 'studentId':
+        DUMMY_SETTINGS = [
+          ...DUMMY_SETTINGS,
+          { title: '학번', content: values[i], id: i + 1 },
+        ]
+        break
+      case 'phoneNumber':
+        DUMMY_SETTINGS = [
+          ...DUMMY_SETTINGS,
+          { title: '전화번호', content: values[i], id: i + 1 },
+        ]
+        break
+      case 'password':
+        DUMMY_SETTINGS = [
+          ...DUMMY_SETTINGS,
+          { title: '비밀번호', content: values[i], id: i + 1 },
+        ]
+        break
+      default:
+        break
+    }
   }
   const navigate = useNavigate()
+  const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false)
   return (
     <div css={settingWrapper}>
+      <Modal
+        isOpen={isModalOpen}
+        onClear={() => {
+          setIsModalOpen((p) => !p)
+        }}
+      >
+        <Modal.Header>정말 탈퇴하시겠습니까?</Modal.Header>
+        <Modal.Content>저장되어있는 모든 정보는 소멸됩니다.</Modal.Content>
+        <Modal.Footer>
+          <Button
+            backgroundColor="primary_subtle"
+            color="primary"
+            size="medium"
+            width="100%"
+            onClick={() => setIsModalOpen((p) => !p)}
+          >
+            취소
+          </Button>
+          <Button
+            backgroundColor="primary"
+            color="white"
+            size="medium"
+            width="100%"
+            onClick={() => {
+              navigate('/login')
+            }}
+          >
+            탈퇴
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <header css={settingHeader}>
         <div
           css={goBackButtonContainer}
@@ -60,7 +124,9 @@ export default function Setting() {
         )
       })}
       <div css={settingFooter}>
-        <p css={withdraw}>회원탈퇴</p>
+        <p css={withdraw} onClick={() => setIsModalOpen((p) => !p)}>
+          회원탈퇴
+        </p>
         <p
           css={logOut}
           onClick={() => {
