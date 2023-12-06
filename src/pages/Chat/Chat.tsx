@@ -94,7 +94,12 @@ export default function Chat() {
             <ChatSvg />
             <p>일반 채팅</p>
           </div>
-          <div css={modalCard}>
+          <div
+            css={modalCard}
+            onClick={() => {
+              navigate('/newchatgroup')
+            }}
+          >
             <TeamChatSvg />
             <p>팀 채팅</p>
           </div>

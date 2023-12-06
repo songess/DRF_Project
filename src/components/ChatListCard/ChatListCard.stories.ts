@@ -13,9 +13,8 @@ type Story = StoryObj<typeof meta>
 export const Chat: Story = {
   args: {
     image: 'defaultImage.jpeg',
-    lastMessage: '배고파요',
+    major: '컴퓨터공학과',
     name: '송은수',
-    numberOfUnreadmessage: 3,
-    time: '오전 10:34',
+    isChecked: false,
   },
 }

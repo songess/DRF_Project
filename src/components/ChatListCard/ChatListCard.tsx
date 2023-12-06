@@ -1,54 +1,39 @@
 import React from 'react'
 import theme from '../../styles/theme'
 import { css } from '@emotion/react'
+import { ReactComponent as Checkbox } from '../../assets/image/checkbox.svg'
+import { ReactComponent as FillCheckbox } from '../../assets/image/fillCheckbox.svg'
 
 interface ChatListCardProps {
   image: string
   name: string
-  lastMessage: string
-  time: string
-  numberOfUnreadmessage: number
+  major: string
+  isChecked: boolean
+  onClick: () => void
 }
 
 export default function ChatListCard({
   image,
   name,
-  lastMessage,
-  time,
-  numberOfUnreadmessage,
+  major,
+  isChecked,
+  onClick,
 }: ChatListCardProps) {
   return (
-    <div css={chatWrapper}>
+    <div css={chatWrapper} onClick={onClick}>
       <img src={image} alt="profile" css={chatImage} />
       <div css={chatInfo}>
         <p css={chatName}>{name}</p>
-        <p css={chatLastContent}>{lastMessage}</p>
+        <p css={chatLastContent}>{major}</p>
       </div>
       <footer css={chatFooter}>
-        <div css={chatTime}>{time}</div>
-        <div css={chatNumberOfMessage}>{numberOfUnreadmessage}</div>
+        {!isChecked ? <Checkbox /> : <FillCheckbox css={squareStyle} />}
       </footer>
     </div>
   )
 }
-
-const chatNumberOfMessage = css`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: ${theme.color.thick_primary};
-  color: ${theme.color.white};
-  font-size: ${theme.textStyle.body_small.font_size};
-  line-height: ${theme.textStyle.body_small.line_height};
-  text-align: center;
-  vertical-align: middle;
-  align-self: end;
-`
-
-const chatTime = css`
-  color: ${theme.color.subtle_light};
-  font-size: ${theme.textStyle.body_small.font_size};
-  line-height: ${theme.textStyle.body_small.line_height};
+const squareStyle = css`
+  color: ${theme.color.primary};
 `
 
 const chatFooter = css`
@@ -56,6 +41,9 @@ const chatFooter = css`
   flex-direction: column;
   gap: 5px;
   justify-content: center;
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 const chatName = css`
@@ -88,4 +76,8 @@ const chatWrapper = css`
   display: flex;
   gap: 16px;
   padding: 5px 20px;
+  &:hover {
+    background-color: ${theme.color.primary_subtle};
+    cursor: pointer;
+  }
 `

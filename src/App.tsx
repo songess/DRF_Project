@@ -20,6 +20,7 @@ import ChatbotSavedChat from './pages/Chatbot/ChatbotSavedChat'
 import ReactHookForm from './pages/Login/LoginForm'
 import FindFriend from './pages/Friend/FindFriend'
 import NewChat from './pages/Chat/NewChat'
+import NewChatGroup from './pages/Chat/NewChatGroup'
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/friend" element={<Friend />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/newchat" element={<NewChat />} />
+        <Route path="/newchatgroup" element={<NewChatGroup />} />
         <Route path="/chatbot" element={<Chatbot />} />
         <Route path="/chatbotmessage" element={<ChatbotMessage />} />
         <Route path="/chatbotsavedchat" element={<ChatbotSavedChat />} />

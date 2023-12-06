@@ -12,6 +12,8 @@ export interface UserInterface {
   index?: number
 }
 
+export const DUMMY_CheckList = atom<number[]>([])
+
 export const DUMMY_Users = atom<UserInterface[]>([
   {
     name: '송은수',
