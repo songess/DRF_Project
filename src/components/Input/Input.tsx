@@ -50,7 +50,7 @@ export default function Input({
           type={type}
           id={placeholder}
           placeholder={placeholder}
-          {...props}
+        {...props}
         />
         {isIconVisible &&
           (whichIcon === 'close' ? (

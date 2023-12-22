@@ -88,7 +88,7 @@ export default function SignUpForm({
               })}
               placeholder="비밀번호"
               id="2"
-              type="password"
+              type={pwdVisible ? 'text' : 'password'}
               css={formInputStyle}
               onFocus={() => setIsFocused2(true)}
               onBlur={() => setIsFocused2(false)}

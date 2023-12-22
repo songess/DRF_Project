@@ -29,8 +29,8 @@ export default function ForgetPassword() {
       toggle()
     }
   }
-  const keyDownHandler = (e:React.KeyboardEvent) =>{
-    if(e.key === "Enter") submitHandler();
+  const keyDownHandler = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') submitHandler()
   }
   return (
     <section css={forgetPasswordWrapper}>
@@ -42,10 +42,8 @@ export default function ForgetPassword() {
             backgroundColor="primary"
             color="white"
             size="medium"
-            width='100%'
-            onClick={() => {
-              toggle();
-            }}
+            width="100%"
+            onClick={toggle}
           >
             확인
           </Button>

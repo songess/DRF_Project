@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import theme from '../../styles/theme'
 import { css } from '@emotion/react'
 import { ReactComponent as ShowStage1 } from '../../assets/image/showStage1.svg'
@@ -7,11 +7,42 @@ import { ReactComponent as Mail } from '../../assets/image/mail.svg'
 import Input from '../../components/Input/Input'
 import Button from '../../components/Button/Button'
 import { useNavigate } from 'react-router-dom'
+import { useModal } from '../../hooks/useModal'
+import Modal from '../../components/Modal/Modal'
 
 export default function SignUp_1() {
   const navigate = useNavigate()
+  const { isOpen, toggle } = useModal()
+  const [email, setEmail] = useState<string>('')
+  const keyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      submitHandler()
+    }
+  }
+  const submitHandler = () => {
+    if (/^\S+@\S+\.\S+$/.test(email)) {
+      navigate('/signup_2')
+    } else {
+      toggle()
+    }
+  }
   return (
     <section css={suWrapper}>
+      <Modal isOpen={isOpen} onClear={toggle}>
+        <Modal.Header>이메일 양식오류</Modal.Header>
+        <Modal.Content>이메일을 입력해주세요</Modal.Content>
+        <Modal.Footer>
+          <Button
+            backgroundColor="primary"
+            color="white"
+            size="medium"
+            onClick={toggle}
+            width='100%'
+          >
+            확인
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <div
         css={goBack}
         onClick={() => {
@@ -31,8 +62,11 @@ export default function SignUp_1() {
         isIconVisible={false}
         isValid={false}
         touched={false}
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         type="email"
         placeholder="이메일"
+        onKeyDown={keyDownHandler}
       />
       <Button
         backgroundColor="primary"
@@ -40,7 +74,7 @@ export default function SignUp_1() {
         size="medium"
         width="100%"
         onClick={() => {
-          navigate('/signup_2')
+          submitHandler()
         }}
       >
         계속

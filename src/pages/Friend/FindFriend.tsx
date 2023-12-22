@@ -11,11 +11,13 @@ import {
   type UserInterface,
 } from '../../util/store'
 import Button from '../../components/Button/Button'
+import PillModal from '../../components/Modal/PillModal'
 
 export default function FindFriend() {
   const navigate = useNavigate()
   const params = useParams().whichtofind
   const [DUMMY_ALLUSER] = useAtom<UserInterface[]>(DUMMY_Allusers)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   const [DUMMY_FRIENDS, setDUMMY_FRIENDS] = useAtom(DUMMY_friends)
   const [isAlreadyFriends, setIsAlreadyFriends] = useState<boolean>(false)
   const [FindedUser, setFindedUser] = useState<UserInterface[]>([])
@@ -50,6 +52,7 @@ export default function FindFriend() {
     if (!isAlreadyFriends) {
       setIsAlreadyFriends(true)
       setDUMMY_FRIENDS((p: UserInterface[]) => [...p, FindedUser[0]])
+      setIsOpen(true)
     } else {
       navigate('/friend')
     }
@@ -60,8 +63,10 @@ export default function FindFriend() {
       inputFocus.focus()
     }
   }, [])
+  console.log(isOpen)
   return (
     <div css={findfriendWrapper}>
+      <PillModal content="친구추가 완료!" isOpen={isOpen} />
       <Header header={`${params}으로 친구추가`} />
       <IconInput
         whichIcon="check"

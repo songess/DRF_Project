@@ -8,6 +8,7 @@ import Button from '../../components/Button/Button'
 import { useNavigate } from 'react-router-dom'
 import Modal from '../../components/Modal/Modal'
 import { useModal } from '../../hooks/useModal'
+import Input from '../../components/Input/Input'
 
 export default function SignUp_2() {
   const ref = useRef()
@@ -44,16 +45,16 @@ export default function SignUp_2() {
       <Mail />
       <div css={fp2HeaderStyle}>OTP 5자리를 입력해주세요</div>
       <div css={fp2ContentStyle}>
-        이메일로 보낸 OTP
-        <br />
-        5자리를 입력해주세요.
+        이메일로 보낸 OTP 5자리를 입력해주세요.
       </div>
-      <div css={fp2OTPBoxStyle}>
-        <input css={otpBox}></input>
-        <input css={otpBox}></input>
-        <input css={otpBox}></input>
-        <input css={otpBox}></input>
-        <input css={otpBox}></input>
+      <div>
+        <Input
+          isIconVisible={false}
+          isValid={true}
+          touched={false}
+          type="text"
+          placeholder="OTP 5자리를 입력하세요"
+        />
       </div>
       <Button
         backgroundColor="primary"

@@ -44,11 +44,7 @@ export default function ForgetPassword_2() {
       <ShowStage2 />
       <Mail />
       <div css={fp2HeaderStyle}>OTP 5자리를 입력해주세요</div>
-      <div css={fp2ContentStyle}>
-        이메일로 보낸 OTP
-        <br />
-        5자리를 입력해주세요.
-      </div>
+      <div css={fp2ContentStyle}>이메일로 보낸 OTP 5자리를 입력해주세요.</div>
       <div css={inputStyle}>
         <Input
           isIconVisible={false}
@@ -72,8 +68,7 @@ export default function ForgetPassword_2() {
     </section>
   )
 }
-const inputStyle = css`
-`
+const inputStyle = css``
 
 const goBack = css`
   position: absolute;
