@@ -18,6 +18,7 @@ export default function SettingDetail() {
     setUserSettingChange(e.target.value)
   }
   const settingLoginUser = () => {
+    console.log(_detail) //title을 통해 구분해야함..
     setDUMMY_USER((prev) => ({ ...prev, [_detail]: userSettingChange }))
     navigate('/setting', { replace: true })
   }

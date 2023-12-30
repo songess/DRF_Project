@@ -13,15 +13,19 @@ import UpdateModal from '../../components/Modal/UpdateModal'
 import IconInput from '../../components/IconInput/IconInput'
 import useHeaderButton from '../../hooks/useHeaderButton'
 import { useAtom } from 'jotai'
-import { DUMMY_friends, LoginUser, type UserInterface } from '../../util/store'
+import {
+  DUMMY_chat,
+  DUMMY_friends,
+  LoginUser,
+  type UserInterface,
+} from '../../util/store'
 import { set } from 'ol/transform'
 import { motion } from 'framer-motion'
 
-const me = '송은수'
-
 export default function Friend() {
   const navigate = useNavigate()
-  const [Loginuser]=useAtom(LoginUser);
+  const [DUMMY_CHAT, setDUMMY_CHAT] = useAtom(DUMMY_chat)
+  const [Loginuser] = useAtom(LoginUser)
   const [DUMMY_FRIENDs] = useAtom(DUMMY_friends)
   const [DUMMY_FRIENDS, setDUMMY_FRIENDS] =
     useState<UserInterface[]>(DUMMY_FRIENDs)
@@ -85,6 +89,27 @@ export default function Friend() {
       navigate('/findfriend/학번')
     }
   }
+  const gotoChatRoomHandler = () => {
+    let iteration = 0
+    DUMMY_CHAT.forEach((chat) => {
+      if (chat.opponent === selectedFriend.name) {
+        navigate(`/chat/${chat.id}`)
+      }
+      iteration++
+    })
+    if (iteration === DUMMY_CHAT.length) {
+      setDUMMY_CHAT((prev) => {
+        const newChatRoom = {
+          opponent: selectedFriend.name,
+          id: String(DUMMY_CHAT.length + 1),
+          chatting: [],
+        }
+        const newChatRooms = prev.concat(newChatRoom)
+        return newChatRooms
+      })
+      navigate(`/chat/${DUMMY_CHAT.length + 1}`)
+    }
+  }
   const inputRef = useRef<HTMLInputElement>(null)
   useEffect(() => {
     // const searchInput = document.querySelector<HTMLInputElement>('#search')
@@ -132,6 +157,7 @@ export default function Friend() {
             color="white"
             size="medium"
             width="100%"
+            onClick={gotoChatRoomHandler}
           >
             1:1채팅
           </Button>

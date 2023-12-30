@@ -7,7 +7,8 @@ interface ItemProps {
   image: string
   lastMessage: string
   time: string
-  numberOfUnreadMessage: number;
+  numberOfUnreadMessage: number
+  onClick: () => void
 }
 
 export default function ChatListItem({
@@ -16,22 +17,24 @@ export default function ChatListItem({
   lastMessage,
   time,
   numberOfUnreadMessage,
+  onClick,
 }: ItemProps) {
-  
-  return <section css={chatListItemWrapper}>
-    <img src={image} alt="profile" css={itemImageStyle} />
-    <div css={itemContent}>
-      <div css={itemNameStyle}>{name}</div>
-      <div css={itemMessageStyle}>{lastMessage}</div>
-    </div>
-    <div css={itemInfo}>
-      <div css={itemTimeStyle}>{time}</div>
-      <div css={itemNumberStyle}>{numberOfUnreadMessage}</div>
-    </div> 
-  </section>
+  return (
+    <section css={chatListItemWrapper} onClick={onClick}>
+      <img src={image} alt="profile" css={itemImageStyle} />
+      <div css={itemContent}>
+        <div css={itemNameStyle}>{name}</div>
+        <div css={itemMessageStyle}>{lastMessage}</div>
+      </div>
+      <div css={itemInfo}>
+        <div css={itemTimeStyle}>{time}</div>
+        <div css={itemNumberStyle}>{numberOfUnreadMessage}</div>
+      </div>
+    </section>
+  )
 }
 
-const itemNumberStyle =css`
+const itemNumberStyle = css`
   width: 20px;
   height: 20px;
   border-radius: 10px;
@@ -42,7 +45,7 @@ const itemNumberStyle =css`
   color: ${theme.color.white};
 `
 
-const itemTimeStyle  = css`
+const itemTimeStyle = css`
   font-size: ${theme.textStyle.body_medium.font_size};
   line-height: ${theme.textStyle.body_medium.line_height};
   color: ${theme.color.subtle_light};
@@ -60,7 +63,7 @@ const itemMessageStyle = css`
   color: ${theme.color.subtle_light};
 `
 
-const itemContent =css`
+const itemContent = css`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -74,9 +77,8 @@ const itemNameStyle = css`
 
 const itemImageStyle = css`
   width: 50px;
-  height:50px;
+  height: 50px;
   border-radius: 10px;
-
 `
 
 const chatListItemWrapper = css`

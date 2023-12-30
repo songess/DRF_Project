@@ -22,7 +22,7 @@ interface ChatType {
 
 const DUMMY_CHAT: ChatType[] = [
   {
-    name: '박채원',
+    name: '채원',
     image: 'defaultImage.jpeg',
     lastMessage: '혹시 시간 되시나요?',
     time: '오후 10:34:01',
@@ -30,7 +30,7 @@ const DUMMY_CHAT: ChatType[] = [
     numberOfUnreadMessage: 3,
   },
   {
-    name: '이학림',
+    name: '학림',
     image: 'defaultImage.jpeg',
     lastMessage: '아까 ㅈㄴ 어이없었음',
     time: '오후 10:32:01',
@@ -38,7 +38,7 @@ const DUMMY_CHAT: ChatType[] = [
     numberOfUnreadMessage: 10,
   },
   {
-    name: '강주혁',
+    name: '주혁',
     image: 'defaultImage.jpeg',
     lastMessage: '그래서 어떻게 하면 되는데',
     time: '오후 09:34:01',
@@ -129,6 +129,9 @@ export default function Chat() {
             numberOfUnreadMessage={chat.numberOfUnreadMessage}
             time={chat.time.slice(0, chat.time.length - 3)}
             key={chat.id}
+            onClick={() => {
+              navigate(`/chat/${chat.id}`)
+            }}
           />
         ))}
       </section>

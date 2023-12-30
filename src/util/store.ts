@@ -12,6 +12,20 @@ export interface UserInterface {
   index?: number
 }
 
+interface Chatting {
+  content: string
+  date: string
+  time: string
+  id: string
+  from: string
+}
+
+interface ChatRoom {
+  chatting: Chatting[]
+  opponent: string
+  id: string
+}
+
 export const DUMMY_CheckList = atom<number[]>([])
 
 export const DUMMY_Users = atom<UserInterface[]>([
@@ -26,7 +40,7 @@ export const DUMMY_Users = atom<UserInterface[]>([
     id: 1,
   },
   {
-    name: '박채원',
+    name: '채원',
     major: '디자인과',
     studentId: '20202020',
     img: '/myProfileImage.jpg',
@@ -172,5 +186,110 @@ export const DUMMY_Allusers = atom<UserInterface[]>([
     email: 'songess@naver.com',
     phoneNumber: '01091459931',
     password: 'qmfforvldzm',
+  },
+])
+
+export const DUMMY_chat = atom<ChatRoom[]>([
+  {
+    chatting: [
+      {
+        content: '안녕하세요',
+        date: '2023. 10. 10.',
+        time: '오후 10:23:01',
+        id: '1',
+        from: '채원',
+      },
+      {
+        content: '시러요',
+        date: '2023. 10. 10.',
+        time: '오후 10:24:01',
+        id: '2',
+        from: '채원',
+      },
+      {
+        content: '>.<',
+        date: '2023. 10. 10.',
+        time: '오후 10:25:01',
+        id: '3',
+        from: '송은수',
+      },
+      {
+        content: '혹시 시간 되시나요?',
+        time: '오후 10:26:01',
+        date: '2023. 10. 10.',
+        id: '4',
+        from: '채원',
+      },
+    ],
+    opponent: '채원',
+    id: '1',
+  },
+  {
+    chatting: [
+      {
+        content: '안녕하세요',
+        time: '오후 10:33:01',
+        date: '2023. 10. 10.',
+        id: '1',
+        from: '학림',
+      },
+      {
+        content: '하지 마세요',
+        time: '오후 10:34:01',
+        date: '2023. 10. 10.',
+        id: '2',
+        from: '학림',
+      },
+      {
+        content: '당장 해결해',
+        time: '오후 10:35:01',
+        date: '2023. 10. 10.',
+        id: '3',
+        from: '송은수',
+      },
+      {
+        content: '아까 ㅈㄴ 어이없었음',
+        time: '오후 10:36:01',
+        date: '2023. 10. 10.',
+        id: '4',
+        from: '학림',
+      },
+    ],
+    opponent: '학림',
+    id: '2',
+  },
+  {
+    chatting: [
+      {
+        content: '안녕하세요',
+        time: '오후 10:43:01',
+        date: '2023. 10. 10.',
+        id: '1',
+        from: '주혁',
+      },
+      {
+        content: '하지 마세요',
+        time: '오후 10:44:01',
+        date: '2023. 10. 10.',
+        id: '2',
+        from: '주혁',
+      },
+      {
+        content: '당장 해결해',
+        time: '오후 10:45:01',
+        date: '2023. 10. 10.',
+        id: '3',
+        from: '송은수',
+      },
+      {
+        content: '그래서 어떻게 하면 되는데?',
+        date: '2023. 10. 10.',
+        time: '오후 10:46:01',
+        id: '4',
+        from: '송은수',
+      },
+    ],
+    opponent: '주혁',
+    id: '3',
   },
 ])

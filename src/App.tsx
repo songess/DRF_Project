@@ -21,6 +21,7 @@ import ReactHookForm from './pages/Login/LoginForm'
 import FindFriend from './pages/Friend/FindFriend'
 import NewChat from './pages/Chat/NewChat'
 import NewChatGroup from './pages/Chat/NewChatGroup'
+import ChatRoom from './pages/ChatRoom/ChatRoom'
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/friend" element={<Friend />} />
         <Route path="/chat" element={<Chat />} />
+        <Route path="/chat/:roomId" element={<ChatRoom />} />
         <Route path="/newchat" element={<NewChat />} />
         <Route path="/newchatgroup" element={<NewChatGroup />} />
         <Route path="/chatbot" element={<Chatbot />} />

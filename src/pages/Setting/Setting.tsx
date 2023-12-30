@@ -12,39 +12,50 @@ import Button from '../../components/Button/Button'
 
 export default function Setting() {
   const [DUMMY_USER] = useAtom(LoginUser)
+  console.log(LoginUser)
   const keys = Object.keys(DUMMY_USER)
   const values = Object.values(DUMMY_USER)
-  let DUMMY_SETTINGS: { title: string; content: string; id: number }[] = []
+  let DUMMY_SETTINGS: {
+    key: string
+    title: string
+    content: string
+    id: number
+  }[] = []
   for (let i = 0; i < keys.length; i++) {
     switch (keys[i]) {
       case 'name':
         DUMMY_SETTINGS = [
           ...DUMMY_SETTINGS,
-          { title: '이름', content: values[i], id: i + 1 },
+          { key: 'name', title: '이름', content: values[i], id: i + 1 },
         ]
         break
       case 'email':
         DUMMY_SETTINGS = [
           ...DUMMY_SETTINGS,
-          { title: '이메일', content: values[i], id: i + 1 },
+          { key: 'email', title: '이메일', content: values[i], id: i + 1 },
         ]
         break
       case 'studentId':
         DUMMY_SETTINGS = [
           ...DUMMY_SETTINGS,
-          { title: '학번', content: values[i], id: i + 1 },
+          { key: 'studentId', title: '학번', content: values[i], id: i + 1 },
         ]
         break
       case 'phoneNumber':
         DUMMY_SETTINGS = [
           ...DUMMY_SETTINGS,
-          { title: '전화번호', content: values[i], id: i + 1 },
+          {
+            key: 'phoneNumber',
+            title: '전화번호',
+            content: values[i],
+            id: i + 1,
+          },
         ]
         break
       case 'password':
         DUMMY_SETTINGS = [
           ...DUMMY_SETTINGS,
-          { title: '비밀번호', content: values[i], id: i + 1 },
+          { key: 'password', title: '비밀번호', content: values[i], id: i + 1 },
         ]
         break
       default:

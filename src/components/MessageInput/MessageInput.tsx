@@ -1,21 +1,35 @@
 import React from 'react'
 import theme from '../../styles/theme'
 import { css } from '@emotion/react'
-import {ReactComponent as Plus} from "../../assets/image/plus.svg"
-import {ReactComponent as Send} from "../../assets/image/send.svg"
+import { ReactComponent as Plus } from '../../assets/image/plus.svg'
+import { ReactComponent as Send } from '../../assets/image/send.svg'
 
-interface MessageInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface MessageInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  onClick?: () => void
 }
 
-export default function MessageInput({...props}:MessageInputProps) {
+export default function MessageInput({ onClick, ...props }: MessageInputProps) {
+  const keyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      onClick?.();
+    }
+  }
   return (
     <label css={messageInputWrapper}>
-      <Plus/>
-      <input css={messageInputStyle} {...props}/>
-      <Send/>
+      <Plus />
+      <input css={messageInputStyle} {...props} onKeyPress={keyDownHandler}/>
+      <Send css={sendButton} onClick={onClick} />
     </label>
   )
 }
+
+const sendButton = css`
+  cursor: pointer;
+  &:hover {
+    color: ${theme.color.background};
+  }
+`
 
 const messageInputStyle = css`
   border: none;
@@ -33,4 +47,5 @@ const messageInputWrapper = css`
   gap: 10px;
   border: 2px solid ${theme.color.subtle_light};
   color: ${theme.color.normal};
+  background-color: white;
 `
