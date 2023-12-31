@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import theme from '../../styles/theme'
 import { css } from '@emotion/react'
 import { ReactComponent as Plus } from '../../assets/image/plus.svg'
@@ -11,14 +11,15 @@ interface MessageInputProps
 
 export default function MessageInput({ onClick, ...props }: MessageInputProps) {
   const keyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.nativeEvent.isComposing) return
     if (e.key === 'Enter') {
-      onClick?.();
+      onClick?.()
     }
   }
   return (
     <label css={messageInputWrapper}>
       <Plus />
-      <input css={messageInputStyle} {...props} onKeyPress={keyDownHandler}/>
+      <input css={messageInputStyle} {...props} onKeyDown={keyDownHandler} />
       <Send css={sendButton} onClick={onClick} />
     </label>
   )

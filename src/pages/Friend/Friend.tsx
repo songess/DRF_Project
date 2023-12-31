@@ -19,7 +19,6 @@ import {
   LoginUser,
   type UserInterface,
 } from '../../util/store'
-import { set } from 'ol/transform'
 import { motion } from 'framer-motion'
 
 export default function Friend() {
@@ -94,6 +93,7 @@ export default function Friend() {
     DUMMY_CHAT.forEach((chat) => {
       if (chat.opponent === selectedFriend.name) {
         navigate(`/chat/${chat.id}`)
+        return
       }
       iteration++
     })

@@ -283,7 +283,7 @@ export const DUMMY_chat = atom<ChatRoom[]>([
       },
       {
         content: '그래서 어떻게 하면 되는데?',
-        date: '2023. 10. 10.',
+        date: '2023. 10. 12.',
         time: '오후 10:46:01',
         id: '4',
         from: '송은수',

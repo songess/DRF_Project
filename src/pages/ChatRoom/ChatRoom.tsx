@@ -62,6 +62,16 @@ export default function ChatRoom() {
     }
   })
 
+  useEffect(() => {
+    let timeout = setTimeout(() => {
+      console.log('hello')
+    }, 1000)
+
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [])
+
   return (
     <div css={chatRoomWrapper}>
       <ChatHeader header={DUMMY_CHAT[friendIndex].opponent} key="1" />
