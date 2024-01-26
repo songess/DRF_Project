@@ -73,7 +73,6 @@ const chatbotMessageWrapper = css`
 `
 
 const myMessageWrapper = css`
-  margin-right: 20px;
   align-self: end;
   padding: 20px;
   background-color: ${theme.color.thick_primary_subtle};

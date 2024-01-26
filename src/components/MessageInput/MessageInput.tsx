@@ -49,4 +49,7 @@ const messageInputWrapper = css`
   border: 2px solid ${theme.color.subtle_light};
   color: ${theme.color.normal};
   background-color: white;
+  svg {
+    flex-shrink: 0;
+  }
 `

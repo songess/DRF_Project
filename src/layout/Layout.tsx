@@ -20,6 +20,7 @@ const layout = css`
 
 const container = css`
   max-width: 540px;
+  min-width: 320px;
   height: 100%;
   margin: 0 auto;
   background-color: ${theme.color.white};
